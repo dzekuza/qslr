@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { ProductCard } from "@/components/products/ProductCard";
+import { H1, H2, H3, H4, Muted, P, Small } from "@/components/ui/typography";
 import {
     ArrowLeft,
     Award,
@@ -62,12 +64,107 @@ async function getProduct(id: string) {
     }
 }
 
+async function getSimilarProducts(
+    currentProductId: string,
+    categories: any[],
+    limit: number = 4,
+) {
+    try {
+        const categoryIds = categories.map((cat) => cat.id);
+        let similarProducts = [];
+
+        // First try to find products with matching categories
+        if (categoryIds.length > 0) {
+            similarProducts = await prisma.product.findMany({
+                where: {
+                    id: { not: currentProductId },
+                    status: "ACTIVE",
+                    categories: {
+                        some: {
+                            id: { in: categoryIds },
+                        },
+                    },
+                },
+                include: {
+                    vendor: {
+                        include: {
+                            user: true,
+                        },
+                    },
+                    categories: true,
+                    reviews: {
+                        include: {
+                            user: true,
+                        },
+                    },
+                },
+                take: limit,
+                orderBy: {
+                    createdAt: "desc",
+                },
+            });
+        }
+
+        // If no similar products found by category, get any other active products
+        if (similarProducts.length === 0) {
+            similarProducts = await prisma.product.findMany({
+                where: {
+                    id: { not: currentProductId },
+                    status: "ACTIVE",
+                },
+                include: {
+                    vendor: {
+                        include: {
+                            user: true,
+                        },
+                    },
+                    categories: true,
+                    reviews: {
+                        include: {
+                            user: true,
+                        },
+                    },
+                },
+                take: limit,
+                orderBy: {
+                    createdAt: "desc",
+                },
+            });
+        }
+
+        // Transform to match ProductCard interface
+        return similarProducts.map((product) => ({
+            id: product.id,
+            name: product.name,
+            price: `€${product.price.toFixed(2)}`,
+            image: product.thumbnail || product.images[0] ||
+                "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png",
+            specifications: {
+                power: product.wattage ? `${product.wattage}W` : "N/A",
+                type: product.panelType || "N/A",
+                color: "Silver Frame",
+                dimensions: product.dimensions || "N/A",
+            },
+        }));
+    } catch (error) {
+        console.error("Error fetching similar products:", error);
+        return [];
+    }
+}
+
 export default async function ProductPage({ params }: ProductPageProps) {
     const product = await getProduct(params.id);
 
     if (!product) {
         notFound();
     }
+
+    // Fetch similar products based on categories
+    const similarProducts = await getSimilarProducts(
+        params.id,
+        product.categories,
+        4,
+    );
 
     const averageRating = product.reviews.length > 0
         ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
@@ -80,7 +177,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
     return (
         <PublicLayout>
-            <div className=" min-h-screen">
+            <div className="">
                 {/* Breadcrumb */}
 
                 <div className="max-w-7xl mx-auto px-4 py-3">
@@ -106,9 +203,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         <div className="basis-0 content-stretch flex flex-col gap-[16px] grow items-start justify-center min-h-px min-w-px relative shrink-0">
                             {/* Product Info Card */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[16px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
-                                <p className="font-bold leading-[normal] not-italic relative shrink-0 text-[32px] text-black w-full">
+                                <H3 className="text-[32px] font-bold">
                                     {product.name}
-                                </p>
+                                </H3>
                                 <div className="content-center flex flex-wrap gap-[4px] items-center relative shrink-0 w-full">
                                     {/* Power Badge - Green */}
                                     <div className="bg-[#00b56a] box-border content-stretch flex gap-[6px] items-center px-[8px] py-[4px] relative rounded-[4px] shrink-0">
@@ -173,31 +270,25 @@ export default async function ProductPage({ params }: ProductPageProps) {
                             </div>
 
                             {/* Description Section */}
-                            <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start leading-[20px] not-italic p-[24px] relative rounded-[16px] shrink-0 text-black w-full">
-                                <p
-                                    className="font-semibold relative shrink-0 text-[16px] w-full"
-                                    style={{ fontWeight: 600 }}
-                                >
+                            <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[16px] items-start leading-[20px] not-italic p-[24px] relative rounded-[16px] shrink-0 text-black w-full">
+                                <H3 className="text-[16px] font-semibold">
                                     Description
-                                </p>
-                                <p className="font-normal min-w-full relative shrink-0 text-[14px] w-full">
+                                </H3>
+                                <P className="text-[14px] font-normal leading-relaxed">
                                     {product.description}
-                                </p>
+                                </P>
                             </div>
 
                             {/* Details Section */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
-                                <p
-                                    className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full"
-                                    style={{ fontWeight: 600 }}
-                                >
+                                <H3 className="text-[16px] font-semibold">
                                     Full details list
-                                </p>
+                                </H3>
                                 <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
                                     <div className="grid grid-cols-2 gap-4 font-medium text-[14px] w-full pb-3 border-b border-gray-200">
-                                        <p className="text-[rgba(29,29,31,0.5)]">
+                                        <Small className="text-[rgba(29,29,31,0.5)]">
                                             Inverter type
-                                        </p>
+                                        </Small>
                                         <p className="text-black">
                                             {product.panelType ||
                                                 "Microinverter"}
@@ -240,27 +331,40 @@ export default async function ProductPage({ params }: ProductPageProps) {
                             </div>
 
                             {/* Attachments Section */}
-                            {product.attachments && product.attachments.length > 0 && (
+                            {product.attachments &&
+                                product.attachments.length > 0 && (
                                 <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
-                                    <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full" style={{ fontWeight: 600 }}>
+                                    <p
+                                        className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full"
+                                        style={{ fontWeight: 600 }}
+                                    >
                                         Documents & Downloads
                                     </p>
                                     <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-                                        {product.attachments.map((attachment) => (
-                                            <div key={attachment.id} className="grid grid-cols-2 gap-4 font-medium text-[14px] w-full pb-3 border-b border-gray-200">
+                                        {product.attachments.map((
+                                            attachment,
+                                        ) => (
+                                            <div
+                                                key={attachment.id}
+                                                className="grid grid-cols-2 gap-4 font-medium text-[14px] w-full pb-3 border-b border-gray-200"
+                                            >
                                                 <div className="flex items-center gap-2">
                                                     <FileText className="w-4 h-4 text-gray-600" />
                                                     <span className="text-[rgba(29,29,31,0.5)]">
-                                                        {attachment.originalName}
+                                                        {attachment
+                                                            .originalName}
                                                     </span>
                                                 </div>
                                                 <div className="flex items-center justify-end gap-2">
                                                     <span className="text-black">
-                                                        {(attachment.fileSize / 1024).toFixed(1)} KB
+                                                        {(attachment.fileSize /
+                                                            1024).toFixed(1)} KB
                                                     </span>
-                                                    <a 
-                                                        href={attachment.filePath} 
-                                                        download={attachment.originalName}
+                                                    <a
+                                                        href={attachment
+                                                            .filePath}
+                                                        download={attachment
+                                                            .originalName}
                                                         className="flex items-center gap-1 text-[#00b56a] hover:text-[#00a55a] transition-colors"
                                                     >
                                                         <Download className="w-4 h-4" />
@@ -374,6 +478,26 @@ export default async function ProductPage({ params }: ProductPageProps) {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            {/* Similar Products Section - Last Section */}
+            <div className="max-w-7xl mx-auto px-4 py-8">
+                <div className="mb-6">
+                    <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                        Similar Products
+                    </h2>
+                    <p className="text-gray-600">
+                        Discover more products in the same category
+                    </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {similarProducts.map((similarProduct) => (
+                        <ProductCard
+                            key={similarProduct.id}
+                            product={similarProduct}
+                        />
+                    ))}
                 </div>
             </div>
         </PublicLayout>

@@ -23,7 +23,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/products/${product.id}`} className="block">
-      <div className="bg-neutral-50 rounded-xl p-2 flex flex-col gap-3 hover:shadow-lg transition-shadow cursor-pointer">
+      <div className="bg-neutral-50 rounded-xl p-2 flex flex-col gap-3 hover:border hover:border-[#ebebeb] transition-colors cursor-pointer">
         {/* White container */}
         <div className="bg-white rounded-lg p-2 flex flex-col gap-2.5 items-center">
           {/* Product Image */}

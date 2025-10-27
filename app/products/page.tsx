@@ -1,59 +1,26 @@
+"use client";
+
 import { PublicLayout } from "@/components/layout/public-layout";
 import { ProductFilters } from "@/components/products/ProductFilters";
 import { ProductCard } from "@/components/products/ProductCard";
-import { prisma } from "@/lib/prisma";
-
-async function getProducts() {
-  const products = await prisma.product.findMany({
-    where: {
-      status: "ACTIVE",
-    },
-    include: {
-      vendor: {
-        include: {
-          user: true,
-        },
-      },
-      categories: true,
-      reviews: {
-        include: {
-          user: true,
-        },
-      },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  // Transform database data to match component structure
-  return products.map((product) => ({
-    id: product.id,
-    name: product.name,
-    price: `€${product.price.toFixed(2)}`,
-    pricePerWatt: product.wattage
-      ? `€${(product.price / product.wattage).toFixed(3)}/Wp`
-      : undefined,
-    availability: `${product.stock} pcs`,
-    minOrderQuantity: "1 container",
-    vendor: product.vendor.businessName || "Unknown Vendor",
-    vendorCountry: "Poland",
-    rating: product.reviews.length > 0
-      ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
-        product.reviews.length
-      : 0,
-    reviewCount: product.reviews.length,
-    responseTime: "<2h",
-    image: product.thumbnail || product.images[0] ||
-      "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png",
-    specifications: {
-      power: product.wattage ? `${product.wattage}W` : "N/A",
-      type: product.panelType || "N/A",
-      color: "Silver Frame",
-      dimensions: product.dimensions || "N/A",
-    },
-  }));
-}
+import { FilterSummary } from "@/components/products/FilterSummary";
+import { MobileFilters } from "@/components/products/MobileFilters";
+import {
+  FilterState,
+  Product,
+  useProductFilters,
+} from "@/hooks/useProductFilters";
+import { useEffect, useState } from "react";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Fallback product data if database is empty
 const fallbackProducts = [
@@ -200,46 +167,170 @@ const fallbackProducts = [
   },
 ];
 
-export default async function ProductsPage() {
-  // Fetch products from database
-  let products;
-  try {
-    products = await getProducts();
-    // Use fallback if no products found
-    if (products.length === 0) {
-      products = fallbackProducts;
-    }
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    // Use fallback on error
-    products = fallbackProducts;
-  }
+export default function ProductsPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const {
+    filters,
+    filteredProducts,
+    activeFilterCount,
+    handleCheckboxChange,
+    handleRangeChange,
+    removeFilter,
+    clearAllFilters,
+  } = useProductFilters(products);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/public/products");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const data = await response.json();
+
+        if (data.products && data.products.length > 0) {
+          setProducts(data.products);
+        } else {
+          // If no products in database, use fallback data
+          const convertedProducts: Product[] = fallbackProducts.map((
+            product,
+          ) => ({
+            id: product.id,
+            name: product.name,
+            price: parseFloat(product.price.replace("€", "")),
+            wattage: parseInt(product.specifications.power.replace("W", "")),
+            stock: parseInt(product.availability.replace(" pcs", "")),
+            vendor: {
+              businessName: product.vendor,
+              country: product.vendorCountry,
+            },
+            categories: [{ name: "Solar Panels" }],
+          }));
+          setProducts(convertedProducts);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        // Use fallback data on error
+        const convertedProducts: Product[] = fallbackProducts.map((
+          product,
+        ) => ({
+          id: product.id,
+          name: product.name,
+          price: parseFloat(product.price.replace("€", "")),
+          wattage: parseInt(product.specifications.power.replace("W", "")),
+          stock: parseInt(product.availability.replace(" pcs", "")),
+          vendor: {
+            businessName: product.vendor,
+            country: product.vendorCountry,
+          },
+          categories: [{ name: "Solar Panels" }],
+        }));
+        setProducts(convertedProducts);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <PublicLayout>
       <div className="bg-white">
-        {/* Category Header */}
-        <div className="bg-neutral-50 border-t border-b border-gray-200 py-8">
-          <div className="bg-white/10 backdrop-blur-md mx-auto w-full max-w-7xl border border-white/20 px-4 rounded-lg">
-            <h1 className="text-3xl font-medium text-black">Category</h1>
-          </div>
-        </div>
-
         {/* Main Content */}
         <div className="bg-white/10 backdrop-blur-md mx-auto w-full max-w-7xl border border-white/20 px-4 rounded-lg py-6">
           <div className="flex gap-7">
-            {/* Left Sidebar - Filters */}
-            <div className="w-64 flex-shrink-0">
-              <ProductFilters />
+            {/* Left Sidebar - Filters (Desktop Only) */}
+            <div className="hidden md:block w-64 flex-shrink-0">
+              <ProductFilters
+                filters={filters}
+                onCheckboxChange={handleCheckboxChange}
+                onRangeChange={handleRangeChange}
+                onClearAll={clearAllFilters}
+              />
             </div>
 
             {/* Right Content - Product Grid */}
             <div className="flex-1">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+              <h2 className="text-2xl font-semibold text-black mb-4">
+                Category
+              </h2>
+
+              {/* Mobile Filters Button */}
+              <div className="md:hidden mb-4">
+                <MobileFilters
+                  activeFilterCount={activeFilterCount}
+                  filters={filters}
+                  onCheckboxChange={handleCheckboxChange}
+                  onRangeChange={handleRangeChange}
+                  onClearAll={clearAllFilters}
+                />
               </div>
+
+              {/* Filter Summary */}
+              <FilterSummary
+                activeFilters={filters}
+                onRemoveFilter={removeFilter}
+                onClearAll={clearAllFilters}
+              />
+
+              {loading
+                ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="text-gray-500">Loading products...</div>
+                  </div>
+                )
+                : filteredProducts.length === 0
+                ? (
+                  <Empty>
+                    <EmptyHeader>
+                      <EmptyMedia variant="icon">
+                        <Search className="h-8 w-8 text-gray-400" />
+                      </EmptyMedia>
+                      <EmptyTitle>No products found</EmptyTitle>
+                      <EmptyDescription>
+                        Try adjusting your filters to find more products.
+                      </EmptyDescription>
+                    </EmptyHeader>
+                    <EmptyContent>
+                      <Button
+                        variant="outline"
+                        onClick={clearAllFilters}
+                      >
+                        Clear all filters
+                      </Button>
+                    </EmptyContent>
+                  </Empty>
+                )
+                : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {filteredProducts.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={{
+                          id: product.id,
+                          name: product.name,
+                          price: `€${product.price.toFixed(2)}`,
+                          image:
+                            "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png",
+                          specifications: {
+                            power: product.wattage
+                              ? `${product.wattage}W`
+                              : "N/A",
+                            type: product.panelType || "N/A",
+                            color: "Silver Frame",
+                            dimensions: "N/A",
+                          },
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
             </div>
           </div>
         </div>

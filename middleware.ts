@@ -17,7 +17,7 @@ export default withAuth(
     }
 
     // API routes
-    if (pathname.startsWith('/api/auth')) {
+    if (pathname.startsWith('/api/auth') || pathname.startsWith('/api/public')) {
       return NextResponse.next()
     }
 
@@ -51,7 +51,7 @@ export default withAuth(
         const publicRoutes = ['/', '/login', '/register', '/register-vendor', '/products']
         const isPublicRoute = publicRoutes.some(route => pathname === route || pathname.startsWith(`${route}/`))
         
-        if (isPublicRoute || pathname.startsWith('/api/auth')) {
+        if (isPublicRoute || pathname.startsWith('/api/auth') || pathname.startsWith('/api/public')) {
           return true
         }
         

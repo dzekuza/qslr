@@ -54,12 +54,11 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 
-export const productLinks: NavItemType[] = [
+export const shopAllLinks: NavItemType[] = [
     {
         title: "Solar Panels",
         href: "/products/solar-panels",
-        description:
-            "High-efficiency solar panels for residential and commercial use",
+        description: "High-efficiency solar panels for residential and commercial use",
         icon: Sun,
     },
     {
@@ -69,42 +68,37 @@ export const productLinks: NavItemType[] = [
         icon: Zap,
     },
     {
-        title: "Mounting Systems",
-        href: "/products/mounting",
-        description: "Professional mounting solutions for solar installations",
-        icon: Package,
-    },
-    {
-        title: "Battery Storage",
-        href: "/products/batteries",
+        title: "Solar Battery Storage",
+        href: "/products/battery-storage",
         description: "Energy storage solutions for solar systems",
         icon: LayersIcon,
     },
     {
-        title: "Monitoring",
-        href: "/products/monitoring",
-        description: "Real-time solar system monitoring and analytics",
-        icon: BarChart,
+        title: "Mounting Systems",
+        href: "/products/mounting-systems",
+        description: "Professional mounting solutions for solar installations",
+        icon: Package,
     },
     {
-        title: "Accessories",
-        href: "/products/accessories",
-        description: "Cables, connectors, and installation accessories",
+        title: "Electro-technical",
+        href: "/products/electro-technical",
+        description: "Electrical components and technical equipment",
         icon: PlugIcon,
     },
     {
-        title: "Installation Services",
-        href: "/services/installation",
-        description: "Professional solar installation services",
-        icon: Settings,
-    },
-    {
-        title: "Maintenance",
-        href: "/services/maintenance",
-        description: "Solar system maintenance and repair services",
-        icon: TrendingUp,
+        title: "E-mobility",
+        href: "/products/e-mobility",
+        description: "Electric vehicle charging and mobility solutions",
+        icon: Zap,
     },
 ];
+
+export const sellOnStoreLink: NavItemType = {
+    title: "Sell on sun.store",
+    href: "/vendor/signup",
+    description: "Start selling your solar products on our marketplace",
+    icon: UserPlusIcon,
+};
 
 export const companyLinks: NavItemType[] = [
     {
@@ -196,18 +190,18 @@ function DesktopMenu() {
         <NavigationMenu className="hidden lg:block">
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>Shop All</NavigationMenuTrigger>
                     <NavigationMenuContent className="w-full max-w-none">
                         <div className="grid w-full md:grid-cols-[1fr_.30fr]">
                             <ul className="grid grow gap-4 p-4 md:grid-cols-3 md:border-r">
-                                {productLinks.slice(0, 3).map((link) => (
+                                {shopAllLinks.slice(0, 3).map((link) => (
                                     <li key={link.href}>
                                         <NavGridCard link={link} />
                                     </li>
                                 ))}
                             </ul>
                             <ul className="space-y-1 p-4">
-                                {productLinks.slice(3).map((link) => (
+                                {shopAllLinks.slice(3).map((link) => (
                                     <li key={link.href}>
                                         <NavSmallItem
                                             item={link}
@@ -216,6 +210,13 @@ function DesktopMenu() {
                                         />
                                     </li>
                                 ))}
+                                <li className="pt-2 border-t">
+                                    <NavSmallItem
+                                        item={sellOnStoreLink}
+                                        href={sellOnStoreLink.href}
+                                        className="gap-x-1 font-semibold text-primary"
+                                    />
+                                </li>
                             </ul>
                         </div>
                     </NavigationMenuContent>
@@ -273,9 +274,9 @@ function DesktopMenu() {
 function MobileNav() {
     const sections = [
         {
-            id: "products",
-            name: "Products",
-            list: productLinks,
+            id: "shop-all",
+            name: "Shop All",
+            list: [...shopAllLinks, sellOnStoreLink],
         },
         {
             id: "company",
