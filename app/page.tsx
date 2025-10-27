@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { PublicLayout } from "@/components/layout/public-layout";
 import LogoLoop from "@/components/LogoLoop";
 import { ArrowRight, Heart, Search, ShoppingCart, Star } from "lucide-react";
@@ -22,7 +23,7 @@ const featuredProducts = [
     originalPrice: 399.99,
     rating: 4.8,
     reviews: 124,
-    image: "/download.svg",
+    image: "/assets/abb1eff66765117b99567e2acf16610e5cee5265.png",
     vendor: "SolarTech Pro",
     badge: "Best Seller",
     badgeColor: "bg-green-500",
@@ -34,7 +35,7 @@ const featuredProducts = [
     originalPrice: 1099.99,
     rating: 4.6,
     reviews: 89,
-    image: "/download.svg",
+    image: "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png",
     vendor: "PowerMax Solutions",
     badge: "New",
     badgeColor: "bg-blue-500",
@@ -46,7 +47,7 @@ const featuredProducts = [
     originalPrice: 2999.99,
     rating: 4.9,
     reviews: 67,
-    image: "/download.svg",
+    image: "/assets/abb1eff66765117b99567e2acf16610e5cee5265.png",
     vendor: "EnergyStore",
     badge: "Limited",
     badgeColor: "bg-red-500",
@@ -58,7 +59,7 @@ const featuredProducts = [
     originalPrice: 249.99,
     rating: 4.7,
     reviews: 156,
-    image: "/download.svg",
+    image: "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png",
     vendor: "MountPro",
     badge: "Sale",
     badgeColor: "bg-orange-500",
@@ -70,7 +71,7 @@ const featuredProducts = [
     originalPrice: 499.99,
     rating: 4.5,
     reviews: 92,
-    image: "/download.svg",
+    image: "/assets/abb1eff66765117b99567e2acf16610e5cee5265.png",
     vendor: "MicroPower",
     badge: "Popular",
     badgeColor: "bg-purple-500",
@@ -82,7 +83,7 @@ const featuredProducts = [
     originalPrice: 199.99,
     rating: 4.4,
     reviews: 78,
-    image: "/download.svg",
+    image: "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png",
     vendor: "SmartMonitor",
     badge: "Smart",
     badgeColor: "bg-indigo-500",
@@ -120,9 +121,11 @@ export default function Home() {
               href="/products?category=solar-panels"
               className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
-              <img
-                src="/categg.png"
+              <Image
+                src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
                 alt="Solar Panel"
+                width={80}
+                height={80}
                 className="w-[80px] mb-2 object-cover"
               />
               <p className="text-sm font-medium text-black text-center">
@@ -139,9 +142,11 @@ export default function Home() {
                   href="/products?category=inverters"
                   className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
                 >
-                  <img
-                    src="/categg.png"
+                  <Image
+                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
                     alt="Inverter"
+                    width={80}
+                    height={80}
                     className="w-[80px] mb-2 object-cover"
                   />
                   <p className="text-sm font-medium text-black text-center">
@@ -156,9 +161,11 @@ export default function Home() {
               href="/products?category=solar-panels"
               className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
-              <img
-                src="/categg.png"
+              <Image
+                src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
                 alt="Solar Panel"
+                width={80}
+                height={80}
                 className="w-[80px] mb-2 object-cover"
               />
               <p className="text-sm font-medium text-black text-center">
@@ -171,9 +178,11 @@ export default function Home() {
               href="/products?category=inverters"
               className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
-              <img
-                src="/categg.png"
+              <Image
+                src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
                 alt="Inverter"
+                width={80}
+                height={80}
                 className="w-[80px] mb-2 object-cover"
               />
               <p className="text-sm font-medium text-black text-center">
@@ -197,9 +206,11 @@ export default function Home() {
                 Best way to buy products you love
               </p>
               <div className="w-full max-w-[280px] h-[280px]">
-                <img
+                <Image
                   src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
                   alt="Solar Panel Category"
+                  width={280}
+                  height={280}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -210,9 +221,11 @@ export default function Home() {
               {/* Product Card 1 */}
               <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
                 <div className="w-[120px] h-[236px] mb-2">
-                  <img
+                  <Image
                     src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
                     alt="Product"
+                    width={120}
+                    height={236}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -226,9 +239,11 @@ export default function Home() {
               {/* Product Card 2 */}
               <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
                 <div className="w-[120px] h-[236px] mb-2">
-                  <img
-                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
+                  <Image
+                    src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
                     alt="Product"
+                    width={120}
+                    height={236}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -242,9 +257,11 @@ export default function Home() {
               {/* Product Card 3 */}
               <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
                 <div className="w-[120px] h-[236px] mb-2">
-                  <img
+                  <Image
                     src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
                     alt="Product"
+                    width={120}
+                    height={236}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -258,9 +275,11 @@ export default function Home() {
               {/* Product Card 4 */}
               <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
                 <div className="w-[120px] h-[236px] mb-2">
-                  <img
-                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
+                  <Image
+                    src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
                     alt="Product"
+                    width={120}
+                    height={236}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -297,9 +316,11 @@ export default function Home() {
               >
                 {/* Product Image */}
                 <div className="relative aspect-square bg-muted overflow-hidden">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={400}
+                    height={400}
                     className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
                   />
 

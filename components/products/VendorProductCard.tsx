@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Edit, Trash2, Package } from "lucide-react";
+import Image from "next/image";
 
 interface Product {
   id: string;
@@ -101,9 +102,11 @@ export function VendorProductCard({ product, onEdit, onDelete }: VendorProductCa
         <div className="mb-4">
           {product.thumbnail ? (
             <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-              <img
+              <Image
                 src={product.thumbnail}
                 alt={product.name}
+                width={300}
+                height={300}
                 className="w-full h-full object-cover"
               />
             </div>

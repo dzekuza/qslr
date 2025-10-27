@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, X, Image as ImageIcon, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 interface ImageUploadProps {
     images: string[];
@@ -121,9 +122,11 @@ export function ImageUpload({
                         {images.map((image, index) => (
                             <div key={index} className="relative group">
                                 <div className="aspect-square rounded-lg overflow-hidden border-2 border-muted">
-                                    <img
+                                    <Image
                                         src={image}
                                         alt={`Product image ${index + 1}`}
+                                        width={200}
+                                        height={200}
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
