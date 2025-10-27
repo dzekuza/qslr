@@ -259,6 +259,20 @@ export default function VendorWarehousesPage() {
                                                         ...formData,
                                                         address: e.target.value,
                                                     })}
+                                            />
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="street">
+                                                Street *
+                                            </Label>
+                                            <Input
+                                                id="street"
+                                                value={formData.street}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        street: e.target.value,
+                                                    })}
                                                 required
                                             />
                                         </div>
@@ -298,17 +312,16 @@ export default function VendorWarehousesPage() {
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="grid gap-2">
-                                                <Label htmlFor="postalCode">
-                                                    Postal Code
+                                                <Label htmlFor="zipCode">
+                                                    Zip Code *
                                                 </Label>
                                                 <Input
-                                                    id="postalCode"
-                                                    value={formData.postalCode}
+                                                    id="zipCode"
+                                                    value={formData.zipCode}
                                                     onChange={(e) =>
                                                         setFormData({
                                                             ...formData,
-                                                            postalCode:
-                                                                e.target.value,
+                                                            zipCode: e.target.value,
                                                         })}
                                                     required
                                                 />
@@ -328,6 +341,66 @@ export default function VendorWarehousesPage() {
                                                         })}
                                                 />
                                             </div>
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="contactName">
+                                                Contact Name *
+                                            </Label>
+                                            <Input
+                                                id="contactName"
+                                                value={formData.contactName}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        contactName: e.target.value,
+                                                    })}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="email">
+                                                Email *
+                                            </Label>
+                                            <Input
+                                                id="email"
+                                                type="email"
+                                                value={formData.email}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        email: e.target.value,
+                                                    })}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="phone">
+                                                Phone *
+                                            </Label>
+                                            <Input
+                                                id="phone"
+                                                value={formData.phone}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        phone: e.target.value,
+                                                    })}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="apartment">
+                                                Apartment/Suite
+                                            </Label>
+                                            <Input
+                                                id="apartment"
+                                                value={formData.apartment}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        apartment: e.target.value,
+                                                    })}
+                                            />
                                         </div>
                                         <div className="flex items-center space-x-2">
                                             <input
@@ -395,9 +468,7 @@ export default function VendorWarehousesPage() {
                                                 {warehouse.name}
                                             </TableCell>
                                             <TableCell>
-                                                {warehouse.city},{" "}
-                                                {warehouse.state}{" "}
-                                                {warehouse.postalCode}
+                                                {warehouse.street}, {warehouse.city}, {warehouse.zipCode}
                                             </TableCell>
                                             <TableCell>
                                                 <Badge

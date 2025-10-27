@@ -10,6 +10,8 @@ import {
     ArrowLeft,
     Award,
     CheckCircle,
+    Download,
+    FileText,
     Heart,
     MessageSquare,
     Package,
@@ -45,6 +47,7 @@ async function getProduct(id: string) {
                         user: true,
                     },
                 },
+                attachments: true,
             },
         });
 
@@ -235,6 +238,40 @@ export default async function ProductPage({ params }: ProductPageProps) {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Attachments Section */}
+                            {product.attachments && product.attachments.length > 0 && (
+                                <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
+                                    <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full" style={{ fontWeight: 600 }}>
+                                        Documents & Downloads
+                                    </p>
+                                    <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
+                                        {product.attachments.map((attachment) => (
+                                            <div key={attachment.id} className="grid grid-cols-2 gap-4 font-medium text-[14px] w-full pb-3 border-b border-gray-200">
+                                                <div className="flex items-center gap-2">
+                                                    <FileText className="w-4 h-4 text-gray-600" />
+                                                    <span className="text-[rgba(29,29,31,0.5)]">
+                                                        {attachment.originalName}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center justify-end gap-2">
+                                                    <span className="text-black">
+                                                        {(attachment.fileSize / 1024).toFixed(1)} KB
+                                                    </span>
+                                                    <a 
+                                                        href={attachment.filePath} 
+                                                        download={attachment.originalName}
+                                                        className="flex items-center gap-1 text-[#00b56a] hover:text-[#00a55a] transition-colors"
+                                                    >
+                                                        <Download className="w-4 h-4" />
+                                                        Download
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Center Section - Image Gallery */}

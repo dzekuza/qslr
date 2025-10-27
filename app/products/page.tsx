@@ -217,7 +217,7 @@ export default async function ProductsPage() {
 
   return (
     <PublicLayout>
-      <div className="bg-white mt-24">
+      <div className="bg-white">
         {/* Category Header */}
         <div className="bg-neutral-50 border-t border-b border-gray-200 py-8">
           <div className="bg-white/10 backdrop-blur-md mx-auto w-full max-w-7xl border border-white/20 px-4 rounded-lg">

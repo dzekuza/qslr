@@ -113,8 +113,27 @@ model Product {
     vendor            Vendor        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
     reviews           Review[]
     categories        Category[]    @relation("CategoryToProduct")
+    attachments       ProductAttachment[]
 
     @@map("products")
+}
+
+model ProductAttachment {
+    id          String   @id @default(cuid())
+    productId   String
+    fileName    String
+    originalName String
+    filePath    String
+    fileSize    Int
+    mimeType    String
+    fileType    AttachmentType
+    description String?
+    uploadedBy  String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+    @@map("product_attachments")
 }
 
 model Category {
@@ -307,4 +326,14 @@ enum PickupOption {
     CIF
     EXW
     FCA
+}
+
+enum AttachmentType {
+    PDF
+    DOCUMENT
+    IMAGE
+    SPECIFICATION
+    MANUAL
+    CERTIFICATE
+    OTHER
 }
