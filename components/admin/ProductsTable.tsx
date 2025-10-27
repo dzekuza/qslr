@@ -39,6 +39,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { AttachmentUpload } from "@/components/ui/attachment-upload";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { createProduct, updateProductStatus } from "@/lib/actions/admin";
 
@@ -132,6 +133,9 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
     // Image state
     const [productImages, setProductImages] = useState<string[]>([]);
 
+    // Attachment state
+    const [productAttachments, setProductAttachments] = useState<any[]>([]);
+
     const handleStatusChange = async (productId: string, newStatus: string) => {
         setIsUpdating(productId);
         try {
@@ -194,7 +198,40 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
             formDataObj.append("thumbnail", productImages[0] || "");
             formDataObj.append("certification", JSON.stringify([]));
 
-            await createProduct(formDataObj);
+            const result = await createProduct(formDataObj);
+
+            // Upload attachments if any
+            if (productAttachments.length > 0 && result.product) {
+                for (const attachment of productAttachments) {
+                    if (attachment.filePath.startsWith("blob:")) {
+                        // This is a new file that needs to be uploaded
+                        const attachmentFormData = new FormData();
+                        const response = await fetch(attachment.filePath);
+                        const blob = await response.blob();
+                        attachmentFormData.append(
+                            "file",
+                            blob,
+                            attachment.originalName,
+                        );
+                        attachmentFormData.append(
+                            "fileType",
+                            attachment.fileType,
+                        );
+                        attachmentFormData.append(
+                            "description",
+                            attachment.description || "",
+                        );
+
+                        await fetch(
+                            `/api/products/${result.product.id}/attachments`,
+                            {
+                                method: "POST",
+                                body: attachmentFormData,
+                            },
+                        );
+                    }
+                }
+            }
 
             // Reset form
             setFormData({
@@ -218,6 +255,7 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                 lowStockThreshold: "10",
             });
             setProductImages([]);
+            setProductAttachments([]);
             setIsAddDialogOpen(false);
         } catch (error) {
             console.error("Error creating product:", error);
@@ -603,6 +641,14 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                     images={productImages}
                                     onImagesChange={setProductImages}
                                     maxImages={10}
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <AttachmentUpload
+                                    attachments={productAttachments}
+                                    onAttachmentsChange={setProductAttachments}
+                                    maxFiles={5}
                                 />
                             </div>
 

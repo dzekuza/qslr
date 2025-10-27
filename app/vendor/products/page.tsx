@@ -29,6 +29,7 @@ import {
 import { Package, Plus } from "lucide-react";
 import { VendorProductCard } from "@/components/products/VendorProductCard";
 import { Textarea } from "@/components/ui/textarea";
+import { AttachmentUpload } from "@/components/ui/attachment-upload";
 import { ImageUpload } from "@/components/ui/image-upload";
 
 interface Product {
@@ -89,6 +90,9 @@ export default function VendorProductsPage() {
 
     // Image state
     const [productImages, setProductImages] = useState<string[]>([]);
+    
+    // Attachment state
+    const [productAttachments, setProductAttachments] = useState<any[]>([]);
 
     useEffect(() => {
         if (status === "loading") return;
@@ -164,6 +168,28 @@ export default function VendorProductsPage() {
 
             if (!response.ok) throw new Error("Failed to save product");
 
+            const productData = await response.json();
+            
+            // Upload attachments if any
+            if (productAttachments.length > 0 && !editingProduct) {
+                for (const attachment of productAttachments) {
+                    if (attachment.filePath.startsWith('blob:')) {
+                        // This is a new file that needs to be uploaded
+                        const formData = new FormData();
+                        const response = await fetch(attachment.filePath);
+                        const blob = await response.blob();
+                        formData.append('file', blob, attachment.originalName);
+                        formData.append('fileType', attachment.fileType);
+                        formData.append('description', attachment.description || '');
+                        
+                        await fetch(`/api/products/${productData.id}/attachments`, {
+                            method: 'POST',
+                            body: formData,
+                        });
+                    }
+                }
+            }
+
             setDialogOpen(false);
             resetForm();
             fetchProducts();
@@ -234,6 +260,7 @@ export default function VendorProductsPage() {
             lowStockThreshold: "10",
         });
         setProductImages([]);
+        setProductAttachments([]);
     };
 
     const handleFormChange = (field: string, value: string) => {
@@ -618,6 +645,19 @@ export default function VendorProductsPage() {
                                                 images={productImages}
                                                 onImagesChange={setProductImages}
                                                 maxImages={10}
+                                            />
+                                        </div>
+
+                                        {/* Divider */}
+                                        <div className="border-t border-gray-200">
+                                        </div>
+
+                                        {/* Product Attachments */}
+                                        <div className="space-y-2">
+                                            <AttachmentUpload
+                                                attachments={productAttachments}
+                                                onAttachmentsChange={setProductAttachments}
+                                                maxFiles={5}
                                             />
                                         </div>
 
