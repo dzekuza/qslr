@@ -12,6 +12,10 @@ const config: Config = {
       sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       heading: ['NeueMetana', 'ui-sans-serif', 'system-ui', 'sans-serif'],
     },
+    fontWeight: {
+      normal: '400',
+      bold: '700',
+    },
     extend: {
       colors: {
         background: 'hsl(var(--background))',

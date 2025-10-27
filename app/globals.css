@@ -2,6 +2,14 @@
 
 @font-face {
   font-family: 'NeueMetana';
+  src: url('/NeueMetana-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NeueMetana';
   src: url('/NeueMetana-Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
@@ -172,6 +180,10 @@
     @apply bg-background text-foreground;
   }
 
+  .font-heading {
+    font-family: 'NeueMetana', ui-sans-serif, system-ui, sans-serif !important;
+  }
+
 }
 
 /* Animations for sign-in component */
@@ -309,4 +321,13 @@
 
 .animate-accordion-up {
   animation: accordion-up 0.2s ease-out;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }

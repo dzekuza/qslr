@@ -92,86 +92,175 @@ const featuredProducts = [
 export default function Home() {
   return (
     <PublicLayout>
-      {/* Video Hero Section */}
-      <section
-        id="hero-section"
-        className="w-full h-[60vh] relative overflow-hidden border rounded-lg"
-      >
-        <div className="animate-slide-right animate-delay-300 absolute inset-0 rounded-none overflow-hidden bg-black">
-          <video
-            src="/sun_store_header.mp4"
-            className="w-full h-full object-cover"
-            loop
-            muted
-            playsInline
-            autoPlay
-            preload="auto"
-            style={{ display: "block" }}
-          />
+      {/* Hero Section */}
+      <section className="bg-white py-16 pt-32 px-4 md:px-8 lg:px-16 xl:px-24 rounded-lg">
+        <div className="max-w-7xl mx-auto">
+          {/* Main Content */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-16 mb-10">
+            {/* Headline */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-black leading-tight max-w-4xl">
+              Solar panels for daily usage
+            </h1>
 
-          {/* Hero Content Overlay */}
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="text-center text-white px-4 max-w-4xl">
-              <h1 className="text-5xl md:text-6xl mb-6 animate-element font-heading">
-                Solar Panel Marketplace
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 opacity-90 animate-element animate-delay-200">
-                Multi-vendor marketplace for solar panels and related products
+            {/* Right Side Content */}
+            <div className="flex flex-col items-end gap-4 max-w-xs">
+              <p className="text-lg md:text-xl text-black text-right font-medium">
+                Best way to buy products you love
               </p>
-
-              {/* Search Field with Glass Background */}
-              <div className="animate-element animate-delay-400 max-w-2xl mx-auto">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl">
-                  </div>
-                  <div className="relative flex items-center p-2">
-                    <div className="flex-1 flex items-center px-4 py-3">
-                      <Search className="h-6 w-6 text-white/70 mr-3" />
-                      <input
-                        type="text"
-                        placeholder="Search for solar panels, inverters, batteries..."
-                        className="flex-1 bg-transparent text-white placeholder-white/60 text-lg font-medium outline-none"
-                      />
-                    </div>
-                    <button className="ml-2 p-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl transition-colors">
-                      <ArrowRight className="h-6 w-6" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Quick Search Suggestions */}
-                <div className="mt-4 flex flex-wrap gap-2 justify-center">
-                  {[
-                    "Solar Panels",
-                    "Inverters",
-                    "Batteries",
-                    "Mounting Systems",
-                    "Monitoring",
-                  ].map((term, index) => (
-                    <button
-                      key={term}
-                      className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white/80 hover:text-white hover:bg-white/20 rounded-full text-sm font-medium transition-colors border border-white/20"
-                    >
-                      {term}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <button className="bg-black hover:bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                Shop all now
+              </button>
             </div>
           </div>
-          {/* Partner Logos at Bottom */}
-          <div className="absolute bottom-4 left-0 right-0 w-full z-10">
-            <LogoLoop
-              logos={partnerLogos}
-              speed={60}
-              direction="left"
-              logoHeight={32}
-              gap={24}
-              pauseOnHover={true}
-              fadeOut={false}
-              className="opacity-80 [&_img]:brightness-0 [&_img]:invert"
-              ariaLabel="Partner logos"
-            />
+
+          {/* Product Categories */}
+          <div className="flex gap-3 pb-4 overflow-x-auto scrollbar-hide">
+            {/* Solar Panels Card */}
+            <div className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0">
+              <img
+                src="/categg.png"
+                alt="Solar Panel"
+                className="w-[80px] mb-2 object-cover"
+              />
+              <p className="text-sm font-medium text-black text-center">
+                Solar panels
+              </p>
+            </div>
+
+            {/* Inverters Cards */}
+            {Array.from(
+              { length: 6 },
+              (_, i) => (
+                <div
+                  key={i}
+                  className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] flex-shrink-0"
+                >
+                  <img
+                    src="/categg.png"
+                    alt="Inverter"
+                    className="w-[80px] mb-2 object-cover"
+                  />
+                  <p className="text-sm font-medium text-black text-center">
+                    Inverters
+                  </p>
+                </div>
+              ),
+            )}
+
+            {/* Final Solar Panels Card */}
+            <div className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0">
+              <img
+                src="/categg.png"
+                alt="Solar Panel"
+                className="w-[80px] mb-2 object-cover"
+              />
+              <p className="text-sm font-medium text-black text-center">
+                Solar panels
+              </p>
+            </div>
+
+            {/* Empty Card */}
+            <div className="rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-[190px] flex-shrink-0">
+              <img
+                src="/categg.png"
+                alt="Inverter"
+                className="w-[80px] mb-2 object-cover"
+              />
+              <p className="text-sm font-medium text-black text-center">
+                Inverters
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Showcase Section */}
+      <section className="bg-white py-16 px-4 md:px-8 lg:px-16 xl:px-24 rounded-lg">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-7 items-start">
+            {/* Category Card */}
+            <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end w-full lg:w-auto lg:min-w-[320px]">
+              <h2 className="text-2xl font-semibold text-black mb-2">
+                Solar panels
+              </h2>
+              <p className="text-base text-black mb-4">
+                Best way to buy products you love
+              </p>
+              <div className="w-full max-w-[280px] h-[280px]">
+                <img
+                  src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
+                  alt="Solar Panel Category"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Product Slider */}
+            <div className="flex gap-4 overflow-x-auto flex-1">
+              {/* Product Card 1 */}
+              <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
+                <div className="w-[120px] h-[236px] mb-2">
+                  <img
+                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
+                    alt="Product"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm font-medium text-black mb-1">Category</p>
+                <p className="text-xl font-semibold text-black mb-2 text-center">
+                  This is product name maybe longer
+                </p>
+                <p className="text-base font-medium text-black">€241.10</p>
+              </div>
+
+              {/* Product Card 2 */}
+              <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
+                <div className="w-[120px] h-[236px] mb-2">
+                  <img
+                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
+                    alt="Product"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm font-medium text-black mb-1">Category</p>
+                <p className="text-xl font-semibold text-black mb-2 text-center">
+                  This is product name maybe longer
+                </p>
+                <p className="text-base font-medium text-black">€241.10</p>
+              </div>
+
+              {/* Product Card 3 */}
+              <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
+                <div className="w-[120px] h-[236px] mb-2">
+                  <img
+                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
+                    alt="Product"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm font-medium text-black mb-1">Category</p>
+                <p className="text-xl font-semibold text-black mb-2 text-center">
+                  This is product name maybe longer
+                </p>
+                <p className="text-base font-medium text-black">€241.10</p>
+              </div>
+
+              {/* Product Card 4 */}
+              <div className="bg-neutral-50 rounded-lg p-5 flex flex-col items-center justify-end max-w-[300px] h-[390px] flex-shrink-0">
+                <div className="w-[120px] h-[236px] mb-2">
+                  <img
+                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
+                    alt="Product"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-sm font-medium text-black mb-1">Category</p>
+                <p className="text-xl font-semibold text-black mb-2 text-center">
+                  This is product name maybe longer
+                </p>
+                <p className="text-base font-medium text-black">€241.10</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

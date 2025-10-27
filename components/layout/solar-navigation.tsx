@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
     BarChart,
     DollarSign,
@@ -168,7 +169,7 @@ export default function SolarNavigationMenu() {
                 )}
             />
 
-            <div className="bg-white/10 backdrop-blur-md mx-auto h-14 w-full max-w-4xl border border-white/20 px-4 rounded-lg shadow-2xl">
+            <div className="bg-white/10 backdrop-blur-md mx-auto h-14 w-full max-w-7xl border border-white/20 px-4 rounded-lg">
                 <div className="flex h-full items-center justify-between">
                     <div className="flex items-center gap-2">
                         <Sun className="size-6 text-primary" />
@@ -179,7 +180,9 @@ export default function SolarNavigationMenu() {
                     <DesktopMenu />
 
                     <div className="flex items-center gap-2">
-                        <Button>Get Started</Button>
+                        <Button asChild>
+                            <Link href="/login">Get Started</Link>
+                        </Button>
                         <MobileNav />
                     </div>
                 </div>
