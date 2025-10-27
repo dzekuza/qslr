@@ -2,6 +2,7 @@ import { PublicLayout } from "@/components/layout/public-layout";
 import { ProductFilters } from "@/components/products/ProductFilters";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductCatalogHeader } from "@/components/products/ProductCatalogHeader";
+import styles from "@/components/products/ProductCatalog.module.css";
 
 // Sample data matching the image structure
 const sampleProducts = [
@@ -89,48 +90,29 @@ const quickFilters = [
 export default function ProductsPage() {
   return (
     <PublicLayout>
-      <div className="bg-white py-8 px-4 md:px-8 lg:px-16 xl:px-24 rounded-lg">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex gap-6">
-            {/* Left Sidebar - Filters */}
-            <div className="w-80 flex-shrink-0">
-              <ProductFilters 
-                categories={categories}
-                availabilityOptions={availabilityOptions}
-                quickFilters={quickFilters}
-              />
-            </div>
+      <div className={styles.catalogContainer}>
+        <div className="flex gap-6">
+          {/* Left Sidebar - Filters */}
+          <ProductFilters 
+            categories={categories}
+            availabilityOptions={availabilityOptions}
+            quickFilters={quickFilters}
+          />
 
-            {/* Right Content - Product Listings */}
-            <div className="flex-1">
-              <ProductCatalogHeader 
-                title="Solar Panels"
-                resultCount={1586}
-                currentPage={1}
-                totalPages={50}
-              />
+          {/* Right Content - Product Listings */}
+          <div className="flex-1">
+            <ProductCatalogHeader 
+              title="Solar Panels"
+              resultCount={1586}
+              currentPage={1}
+              totalPages={50}
+            />
 
-              {/* Product Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
-                {sampleProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-
-              {/* Pagination */}
-              <div className="flex justify-center mt-8">
-                <div className="flex items-center gap-2">
-                  <button className="px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
-                    ←
-                  </button>
-                  <span className="px-4 py-2 text-sm text-gray-600">
-                    1 of 50
-                  </span>
-                  <button className="px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
-                    →
-                  </button>
-                </div>
-              </div>
+            {/* Product Grid */}
+            <div className={styles.productGrid}>
+              {sampleProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
             </div>
           </div>
         </div>

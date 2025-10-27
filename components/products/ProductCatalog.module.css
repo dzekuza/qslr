@@ -1,0 +1,309 @@
+/* Product Catalog Styles */
+.catalogContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.filterSidebar {
+  width: 320px;
+  flex-shrink: 0;
+  background: #fafafa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.productCard {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.productCard:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.vendorInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.vendorName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.countryBadge {
+  font-size: 0.75rem;
+  background: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.productImage {
+  height: 12rem;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+}
+
+.productName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.specifications {
+  margin-bottom: 0.75rem;
+}
+
+.specItem {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.specLabel {
+  font-weight: 500;
+}
+
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.availabilityDot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+.availabilityText {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.priceContainer {
+  margin-bottom: 1rem;
+}
+
+.priceText {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #10b981;
+}
+
+.buyButton {
+  width: 100%;
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buyButton:hover {
+  background: #059669;
+}
+
+.filterSection {
+  margin-bottom: 1.5rem;
+}
+
+.filterTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.quickFilterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.quickFilterButton {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quickFilterButton:hover {
+  border-color: #9ca3af;
+}
+
+.quickFilterButton.active {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radioInput {
+  width: 1rem;
+  height: 1rem;
+}
+
+.radioLabel {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkboxInput {
+  width: 1rem;
+  height: 1rem;
+}
+
+.checkboxLabel {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.catalogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.headerLeft {
+  /* Empty for now */
+}
+
+.catalogTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.resultCount {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.groupOffersToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggleLabel {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.toggleSwitch {
+  position: relative;
+  width: 3rem;
+  height: 1.5rem;
+  background: #d1d5db;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggleSwitch.active {
+  background: #10b981;
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.toggleThumb.active {
+  transform: translateX(1.5rem);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginationButton {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.paginationButton:hover {
+  background: #f9fafb;
+}
+
+.paginationInfo {
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 0 0.5rem;
+}

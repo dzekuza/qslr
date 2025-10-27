@@ -116,7 +116,10 @@ export default function Home() {
           {/* Product Categories */}
           <div className="flex gap-3 pb-4 overflow-x-auto scrollbar-hide">
             {/* Solar Panels Card */}
-            <div className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0">
+            <Link
+              href="/products?category=solar-panels"
+              className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
+            >
               <img
                 src="/categg.png"
                 alt="Solar Panel"
@@ -125,15 +128,16 @@ export default function Home() {
               <p className="text-sm font-medium text-black text-center">
                 Solar panels
               </p>
-            </div>
+            </Link>
 
             {/* Inverters Cards */}
             {Array.from(
               { length: 6 },
               (_, i) => (
-                <div
+                <Link
                   key={i}
-                  className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] flex-shrink-0"
+                  href="/products?category=inverters"
+                  className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
                 >
                   <img
                     src="/categg.png"
@@ -143,12 +147,15 @@ export default function Home() {
                   <p className="text-sm font-medium text-black text-center">
                     Inverters
                   </p>
-                </div>
+                </Link>
               ),
             )}
 
             {/* Final Solar Panels Card */}
-            <div className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0">
+            <Link
+              href="/products?category=solar-panels"
+              className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
+            >
               <img
                 src="/categg.png"
                 alt="Solar Panel"
@@ -157,10 +164,13 @@ export default function Home() {
               <p className="text-sm font-medium text-black text-center">
                 Solar panels
               </p>
-            </div>
+            </Link>
 
             {/* Empty Card */}
-            <div className="rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-[190px] flex-shrink-0">
+            <Link
+              href="/products?category=inverters"
+              className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
+            >
               <img
                 src="/categg.png"
                 alt="Inverter"
@@ -169,7 +179,7 @@ export default function Home() {
               <p className="text-sm font-medium text-black text-center">
                 Inverters
               </p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
