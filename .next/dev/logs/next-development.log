@@ -1,0 +1,894 @@
+[00:00:00.788] Server  LOG     
+[00:00:00.789] Server  LOG        We detected TypeScript in your project and reconfigured your tsconfig.json file for you. Strict-mode is set to false by default.
+[00:00:00.789] Server  LOG        The following mandatory changes were made to your tsconfig.json:
+
+[00:00:00.789] Server  LOG        	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+[00:00:00.789] Server  LOG     
+[00:00:00.801] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:00.867] Server  LOG      ✓ Ready in 629ms
+[00:01:40.096] Server  ERROR   prisma:warn In production, we recommend using `prisma generate --no-engine` (See: `prisma generate --help`)
+[00:01:41.137] Server  ERROR    ⨯ ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:01:41.989] Server  ERROR    ⨯ ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:01:42.056] Server  ERROR   Error: write EPIPE
+[00:01:42.064] Server  ERROR    ⨯ "uncaughtException:" Error: write EPIPE
+[00:01:42.070] Server  ERROR    ⨯ "uncaughtException: " Error: write EPIPE
+[00:01:42.153] Browser ERROR   uncaughtError: Error: ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:01:42.304] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:01:42.550] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:05.438] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:19.559] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:19.806] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:22.789] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:24.162] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:26.577] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:27.269] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:27.652] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:27.652] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:28.367] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:28.491] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:31.646] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:32.339] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:32.505] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:32.792] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:35.299] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:35.299] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:35.500] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:35.500] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:36.166] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:38.468] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:38.574] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:38.716] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:43.480] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:43.711] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:43.826] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:46.555] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:49.230] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:49.230] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:49.503] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:51.036] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:51.628] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:52.169] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:52.169] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at ot (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/tailwindcss/dist/lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:53.181] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:53.731] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:55.971] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:02:56.635] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:00.464] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:03.909] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:03.910] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:06.097] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:11.158] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:20.524] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:20.645] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:22.176] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:22.997] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:25.537] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:25.537] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:25.537] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:25.687] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:25.826] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:25.933] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:31.084] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:31.231] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:03:32.662] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/gvozdovic/Desktop/qslr/qslr/app/globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (/Users/gvozdovic/Desktop/qslr/qslr/node_modules/@tailwindcss/postcss/dist/index.js:10:6912)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]

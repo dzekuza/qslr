@@ -1,0 +1,1293 @@
+# Solar Panel B2B/B2C Marketplace - Complete AI Rules
+
+## 📖 When to Use These Rules
+
+### ✅ ALWAYS Apply These Rules When:
+
+1. **Creating/Modifying Components**
+   - Check existing components first
+   - Follow component template
+   - Add IDs and classes with BEM naming
+   - Use TypeScript interfaces for props
+
+2. **Styling Code**
+   - Use Tailwind for utilities and layout
+   - Use Stylus modules for complex styles
+   - NEVER use @apply directive
+   - No inline styles (except dynamic values)
+
+3. **Writing API Routes**
+   - Follow authentication patterns
+   - Use Zod for validation
+   - Handle errors properly
+   - Check user permissions
+
+4. **TypeScript Code**
+   - Use explicit types (no `any`)
+   - Interfaces for props
+   - Enums for constants
+   - Proper error handling
+
+5. **Database Changes**
+   - Use Prisma migrations
+   - Follow naming conventions
+   - Always include timestamps
+
+6. **State Management**
+   - Zustand for global state
+   - Custom hooks for reusable logic
+
+### ❌ Rules Do NOT Apply When:
+
+- Writing one-off utility scripts
+- Creating temporary debugging code (remove before commit)
+- Writing markdown documentation (not code)
+
+### 🔄 Critical Workflow (For Every Change):
+
+```
+1. ANALYZE → Understand current structure
+2. IDENTIFY → Check for reusable components
+3. PLAN → Determine replace/extend/refactor approach
+4. IMPLEMENT → Make changes following conventions
+5. VERIFY → Check all requirements
+```
+
+---
+
+## Your Role
+
+You are a senior full-stack developer with 10+ years of experience building
+scalable e-commerce platforms. You excel at:
+
+- Writing clean, maintainable, and DRY (Don't Repeat Yourself) code
+- Creating reusable component architectures
+- Maintaining consistent code structure throughout development
+- Analyzing existing code before making changes
+- Removing redundant or outdated code rather than nesting new code inside old
+  structures
+- Following established patterns and conventions religiously
+
+---
+
+## Project Overview
+
+### Platform Type
+
+Multi-vendor solar panel marketplace with three user types:
+
+1. **Admin (Platform Owner)**: Manages platform, views all orders, earns
+   commission
+2. **Vendors (Businesses)**: Register, get approved, list products, fulfill
+   orders, receive payments
+3. **Customers (B2C)**: Browse products from all vendors, purchase, track orders
+
+### Business Model
+
+- Platform owner can list own products
+- Vendors list their products after approval
+- Orders show in both admin and vendor dashboards
+- Stripe Connect handles payment splitting (commission to admin, rest to vendor)
+- Vendors handle their own shipping and fulfillment
+
+---
+
+## Critical Development Rules
+
+### Before Making ANY Changes
+
+1. **ANALYZE FIRST**: Always read and understand the current file structure
+   completely
+2. **IDENTIFY REUSABLE COMPONENTS**: Check if a similar component already exists
+   before creating new ones
+3. **PLAN THE CHANGE**: Determine if you need to:
+   - Replace existing code (preferred for structural changes)
+   - Extend existing code (for feature additions)
+   - Refactor existing code (for optimization)
+4. **AVOID NESTING**: Never wrap new sections inside existing ones unless
+   absolutely necessary. Instead, replace or refactor.
+5. **DOCUMENT CHANGES**: Comment why you're removing or replacing code sections
+
+---
+
+## Code Structure Standards
+
+### HTML/JSX Structure
+
+- Every section/div MUST have both an ID and classes
+- Format: `<div id="hero-section" className="hero-section container">`
+- **ID Naming**: Use kebab-case (e.g., `product-grid`,
+  `vendor-dashboard-header`)
+- **Class Naming**: Use BEM methodology
+  - Block: `product-card`
+  - Element: `product-card__image`
+  - Modifier: `product-card--featured`
+- **Component Naming**: PascalCase (e.g., `ProductCard`, `VendorDashboard`)
+- **File Naming**: kebab-case (e.g., `product-card.tsx`, `vendor-dashboard.tsx`)
+
+### Component Philosophy
+
+- **Reuse over Recreation**: Always check `/components` directory before
+  creating new components
+- **Composition over Duplication**: Use component composition to build complex
+  UIs
+- **Props over Hardcoding**: Make components flexible with props
+- **Single Responsibility**: Each component should do ONE thing well
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- Framework: Next.js 14+ (App Router)
+- Language: TypeScript (strict mode)
+- Styling: Tailwind CSS + Stylus modules (hybrid approach)
+- State Management: Zustand
+- Data Fetching: TanStack Query (React Query)
+- Forms: React Hook Form + Zod validation
+- UI Components: shadcn/ui
+- Icons: Lucide React
+
+### Backend
+
+- Framework: Next.js API Routes
+- Language: TypeScript
+- ORM: Prisma
+- Authentication: NextAuth.js v5 (Auth.js)
+- API Design: RESTful
+
+### Database
+
+- Primary DB: PostgreSQL (via Prisma)
+- Always use Prisma migrations for schema changes
+
+### Payments
+
+- Payment Processor: Stripe
+- Multi-vendor: Stripe Connect (Express accounts)
+- Webhooks: Stripe webhooks for order status
+
+### Infrastructure
+
+- Hosting: Vercel (frontend)
+- Database Hosting: Supabase or AWS RDS
+- CDN: Vercel CDN
+- Email: Resend or SendGrid
+- Monitoring: Sentry
+
+---
+
+## Complete Database Schema (Prisma)
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  VENDOR
+  ADMIN
+}
+
+enum VendorStatus {
+  PENDING
+  APPROVED
+  SUSPENDED
+  REJECTED
+}
+
+enum ProductStatus {
+  DRAFT
+  PENDING
+  ACTIVE
+  REJECTED
+  OUT_OF_STOCK
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String?
+  name          String?
+  role          UserRole  @default(CUSTOMER)
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  vendor        Vendor?
+  orders        Order[]
+  reviews       Review[]
+  addresses     Address[]
+
+  @@map("users")
+}
+
+model Vendor {
+  id                String        @id @default(cuid())
+  userId            String        @unique
+  businessName      String
+  businessEmail     String
+  businessPhone     String?
+  taxId             String?
+  description       String?
+  logo              String?
+  status            VendorStatus  @default(PENDING)
+  stripeAccountId   String?       @unique
+  commissionRate    Float         @default(0.15)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  approvedAt        DateTime?
+
+  // Relations
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products          Product[]
+  orders            Order[]
+  payouts           Payout[]
+
+  @@map("vendors")
+}
+
+model Product {
+  id                String          @id @default(cuid())
+  vendorId          String
+  sku               String          @unique
+  name              String
+  slug              String          @unique
+  description       String
+  shortDescription  String?
+  price             Float
+  compareAtPrice    Float?
+  costPerItem       Float?
+  stock             Int             @default(0)
+  lowStockThreshold Int             @default(10)
+  status            ProductStatus   @default(DRAFT)
+
+  // Solar panel specific fields
+  wattage           Int?
+  voltage           Int?
+  panelType         String?
+  efficiency        Float?
+  warranty          Int?
+  dimensions        String?
+  weight            Float?
+  certification     String[]
+
+  images            String[]
+  thumbnail         String?
+
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  publishedAt       DateTime?
+
+  // Relations
+  vendor            Vendor          @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  categories        Category[]
+  orderItems        OrderItem[]
+  reviews           Review[]
+
+  @@map("products")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  image       String?
+  parentId    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  parent      Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryToCategory")
+  products    Product[]
+
+  @@map("categories")
+}
+
+model Order {
+  id                String        @id @default(cuid())
+  orderNumber       String        @unique
+  customerId        String
+  vendorId          String?
+
+  subtotal          Float
+  tax               Float         @default(0)
+  shippingCost      Float         @default(0)
+  discount          Float         @default(0)
+  total             Float
+
+  commissionAmount  Float         @default(0)
+  vendorPayout      Float         @default(0)
+
+  status            OrderStatus   @default(PENDING)
+  paymentIntentId   String?       @unique
+  paymentStatus     String?
+
+  shippingAddressId String
+  billingAddressId  String
+
+  trackingNumber    String?
+  carrier           String?
+  shippedAt         DateTime?
+  deliveredAt       DateTime?
+
+  notes             String?
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  // Relations
+  customer          User          @relation(fields: [customerId], references: [id])
+  vendor            Vendor?       @relation(fields: [vendorId], references: [id])
+  items             OrderItem[]
+  shippingAddress   Address       @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+  billingAddress    Address       @relation("BillingAddress", fields: [billingAddressId], references: [id])
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  productId   String
+
+  quantity    Int
+  price       Float
+
+  createdAt   DateTime @default(now())
+
+  // Relations
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model Address {
+  id          String   @id @default(cuid())
+  userId      String
+
+  fullName    String
+  company     String?
+  phone       String
+
+  line1       String
+  line2       String?
+  city        String
+  state       String
+  postalCode  String
+  country     String
+
+  isDefault   Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingOrders Order[] @relation("ShippingAddress")
+  billingOrders  Order[] @relation("BillingAddress")
+
+  @@map("addresses")
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  productId   String
+  userId      String
+
+  rating      Int
+  title       String?
+  comment     String
+
+  verified    Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId])
+  @@map("reviews")
+}
+
+model Payout {
+  id              String   @id @default(cuid())
+  vendorId        String
+
+  amount          Float
+  currency        String   @default("usd")
+
+  stripeTransferId String?
+  status          String
+
+  periodStart     DateTime
+  periodEnd       DateTime
+
+  createdAt       DateTime @default(now())
+  paidAt          DateTime?
+
+  // Relations
+  vendor          Vendor   @relation(fields: [vendorId], references: [id])
+
+  @@map("payouts")
+}
+```
+
+---
+
+## Authentication & Authorization
+
+### NextAuth Configuration
+
+```typescript
+// lib/auth.ts
+import { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "./prisma";
+import bcrypt from "bcryptjs";
+
+export const authOptions: NextAuthOptions = {
+    adapter: PrismaAdapter(prisma),
+    session: {
+        strategy: "jwt",
+    },
+    pages: {
+        signIn: "/login",
+        error: "/login",
+    },
+    providers: [
+        CredentialsProvider({
+            name: "credentials",
+            credentials: {
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" },
+            },
+            async authorize(credentials) {
+                if (!credentials?.email || !credentials?.password) {
+                    throw new Error("Invalid credentials");
+                }
+
+                const user = await prisma.user.findUnique({
+                    where: { email: credentials.email },
+                    include: { vendor: true },
+                });
+
+                if (!user || !user.password) {
+                    throw new Error("Invalid credentials");
+                }
+
+                const isPasswordValid = await bcrypt.compare(
+                    credentials.password,
+                    user.password,
+                );
+
+                if (!isPasswordValid) {
+                    throw new Error("Invalid credentials");
+                }
+
+                return {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name,
+                    role: user.role,
+                    vendorId: user.vendor?.id,
+                };
+            },
+        }),
+    ],
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.role = user.role;
+                token.vendorId = user.vendorId;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.id = token.sub!;
+                session.user.role = token.role;
+                session.user.vendorId = token.vendorId;
+            }
+            return session;
+        },
+    },
+};
+```
+
+---
+
+## Stripe Connect Implementation
+
+### Vendor Onboarding
+
+```typescript
+// app/api/vendors/stripe/onboard/route.ts
+import { stripe } from "@/lib/stripe";
+import { prisma } from "@/lib/prisma";
+
+export async function POST(req: Request) {
+    const session = await getServerSession(authOptions);
+
+    if (!session || session.user.role !== "VENDOR") {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
+    const vendor = await prisma.vendor.findUnique({
+        where: { userId: session.user.id },
+    });
+
+    if (!vendor) {
+        return new Response("Vendor not found", { status: 404 });
+    }
+
+    let accountId = vendor.stripeAccountId;
+
+    if (!accountId) {
+        const account = await stripe.accounts.create({
+            type: "express",
+            country: "US",
+            email: vendor.businessEmail,
+            capabilities: {
+                card_payments: { requested: true },
+                transfers: { requested: true },
+            },
+        });
+
+        accountId = account.id;
+
+        await prisma.vendor.update({
+            where: { id: vendor.id },
+            data: { stripeAccountId: accountId },
+        });
+    }
+
+    const accountLink = await stripe.accountLinks.create({
+        account: accountId,
+        refresh_url:
+            `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/settings/stripe`,
+        return_url:
+            `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/settings/stripe/success`,
+        type: "account_onboarding",
+    });
+
+    return Response.json({ url: accountLink.url });
+}
+```
+
+---
+
+## Styling Guidelines
+
+### Global CSS Structure
+
+```css
+/* styles/globals.css */
+
+:root {
+    /* Colors - Primary */
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+
+    /* Colors - Neutral */
+    --color-neutral-50: #fafafa;
+    --color-neutral-100: #f5f5f5;
+    --color-neutral-500: #737373;
+    --color-neutral-900: #171717;
+
+    /* Colors - Semantic */
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-info: #3b82f6;
+
+    /* Typography */
+    --font-family-base: "Inter", sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 200ms ease;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+}
+
+.section {
+    padding-top: var(--spacing-3xl);
+    padding-bottom: var(--spacing-3xl);
+}
+
+.card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg);
+}
+```
+
+### Styling Approach
+
+1. **Primary**: Use Tailwind utility classes for spacing, colors, layout
+2. **Secondary**: Use Stylus modules for complex, component-specific styles
+3. **Never**: Use @apply directive
+4. **Never**: Use inline styles unless for dynamic values
+
+### Tailwind + Stylus Hybrid
+
+- Use Tailwind for: spacing, colors, flexbox/grid, common utilities
+- Use Stylus for: complex animations, unique layouts, component-specific
+  patterns
+- File structure: `components/Button/Button.tsx` and
+  `components/Button/Button.module.styl`
+
+---
+
+## React Best Practices
+
+- Use functional components with hooks
+- Use the "function" keyword for component definitions
+- Minimize 'use client' directive - prefer Server Components
+- Implement hooks correctly (useState, useEffect, useContext, etc.)
+- Follow the Rules of Hooks religiously
+- Create custom hooks to extract reusable logic
+- Use React.memo() for component memoization when appropriate
+- Implement useCallback for memoizing functions passed as props
+- Use useMemo for expensive computations
+- Avoid inline function definitions in render
+- Prefer composition over inheritance
+- Implement error boundaries
+- Use cleanup functions in useEffect
+
+---
+
+## Component Template
+
+Always use this structure:
+
+```tsx
+import { HTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
+import styles from "./ComponentName.module.styl";
+
+interface ComponentNameProps extends HTMLAttributes<HTMLDivElement> {
+    title: string;
+    variant?: "default" | "outline" | "ghost";
+    size?: "sm" | "md" | "lg";
+}
+
+export function ComponentName({
+    title,
+    variant = "default",
+    size = "md",
+    className,
+    children,
+    ...props
+}: ComponentNameProps) {
+    return (
+        <div
+            id="component-name-wrapper"
+            className={cn(
+                styles["component-name"],
+                `component-name--${variant}`,
+                `component-name--${size}`,
+                className,
+            )}
+            {...props}
+        >
+            <h2
+                id="component-name-title"
+                className={styles["component-name__title"]}
+            >
+                {title}
+            </h2>
+            <div
+                id="component-name-content"
+                className={styles["component-name__content"]}
+            >
+                {children}
+            </div>
+        </div>
+    );
+}
+```
+
+---
+
+## TypeScript Standards
+
+- Use explicit types for all functions and variables
+- Use interfaces for component props
+- Use enums for constants
+- Always handle errors with try-catch
+- Use type guards when necessary
+- No `any` types - use `unknown` if needed
+
+Example:
+
+```typescript
+interface ProductCardProps {
+    product: Product;
+    onAddToCart: (productId: string) => void;
+    className?: string;
+}
+
+enum OrderStatus {
+    PENDING = "PENDING",
+    PAID = "PAID",
+    SHIPPED = "SHIPPED",
+}
+
+async function fetchProduct(id: string): Promise<Product> {
+    try {
+        const response = await fetch(`/api/products/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch product");
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching product:", error);
+        throw error;
+    }
+}
+```
+
+---
+
+## Code Organization
+
+### File Structure
+
+```
+components/
+  ComponentName/
+    ComponentName.tsx
+    ComponentName.module.styl
+    index.ts
+
+lib/
+  utils.ts
+  validations/
+    product.ts
+
+hooks/
+  use-cart.ts
+
+app/
+  (public)/
+    page.tsx
+  (auth)/
+    login/
+      page.tsx
+```
+
+### Import Order
+
+1. React and Next.js imports
+2. Third-party library imports
+3. Internal component imports
+4. Internal utility imports
+5. Type imports
+6. Style imports
+
+Example:
+
+```tsx
+// React & Next.js
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+
+// Third-party
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+
+// Internal components
+import { ProductCard } from "./ProductCard";
+
+// Utils
+import { formatCurrency } from "@/lib/utils";
+
+// Types
+import type { Product } from "@/types";
+
+// Styles
+import styles from "./ProductGrid.module.styl";
+```
+
+---
+
+## API Route Standards
+
+### Structure
+
+```typescript
+// app/api/products/route.ts
+import { NextRequest } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+
+export async function GET(req: NextRequest) {
+    const searchParams = req.nextUrl.searchParams;
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "20");
+
+    const products = await prisma.product.findMany({
+        // Query with proper error handling
+    });
+
+    return Response.json({
+        products,
+        pagination: { page, limit, total },
+    });
+}
+
+export async function POST(req: NextRequest) {
+    const session = await getServerSession(authOptions);
+
+    if (!session || session.user.role !== "VENDOR") {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
+    const data = await req.json();
+    const validated = productSchema.parse(data);
+
+    const product = await prisma.product.create({
+        data: validated,
+    });
+
+    return Response.json(product, { status: 201 });
+}
+```
+
+---
+
+## CORRECT vs WRONG Approaches
+
+### ❌ WRONG: Nesting New Code
+
+```tsx
+// Old code
+<div id="product-section" className="products">
+  <ProductGrid products={products} />
+</div>
+
+// Wrong: Adding by nesting
+<div id="product-section" className="products">
+  <div className="new-wrapper"> {/* ❌ Unnecessary nesting */}
+    <ProductGrid products={products} />
+    <NewFeature />
+  </div>
+</div>
+```
+
+### ✅ RIGHT: Replace or Add as Sibling
+
+```tsx
+// Clean addition as sibling
+<div id="product-section" className="products">
+  <ProductGrid products={products} />
+  <NewFeature /> {/* ✅ Clean addition */}
+</div>
+
+// Or replace entirely if structure needs to change
+<section id="product-section" className="product-section">
+  <div id="product-grid-wrapper" className="product-section__grid">
+    <ProductGrid products={products} />
+  </div>
+  <aside id="product-sidebar" className="product-section__sidebar">
+    <NewFeature />
+  </aside>
+</section>
+```
+
+---
+
+## Component Development Checklist
+
+Before creating a new component, ALWAYS:
+
+1. ✅ Check if a similar component exists in `/components`
+2. ✅ Determine if this component is reusable
+3. ✅ Define TypeScript interface for props
+4. ✅ Add unique IDs to all major sections
+5. ✅ Use BEM naming for classes
+6. ✅ Decide styling approach (Tailwind vs Stylus)
+7. ✅ Add proper error handling
+8. ✅ Include accessibility attributes (ARIA, keyboard support)
+
+---
+
+## When User Requests Changes
+
+### Always Follow This Protocol
+
+1. **ANALYZE**: First examine the current file structure
+   ```
+   ANALYZE FIRST:
+   - Current file structure: [list files]
+   - Existing components: [list components]
+   - Reusable patterns: [identify patterns]
+   ```
+
+2. **PLAN**: Determine the approach
+   ```
+   PLAN:
+   - Component to modify: [name]
+   - New components needed: [list]
+   - Components to remove: [list]
+   - Reason: [explanation]
+   ```
+
+3. **IMPLEMENT**: Make changes with comments
+   ```
+   IMPLEMENTATION:
+   - File: [path]
+   - Action: [specific changes]
+   - Rationale: [why this approach]
+   ```
+
+4. **VERIFY**: Check all requirements
+   - ✅ IDs added to sections
+   - ✅ Classes follow naming convention
+   - ✅ Component is reusable
+   - ✅ No unnecessary nesting
+   - ✅ TypeScript types defined
+   - ✅ Props documented
+
+---
+
+## Database Standards (Prisma)
+
+- Use `camelCase` for field names
+- Use `PascalCase` for model names
+- Use `snake_case` for database table names (via `@@map`)
+- Always include `createdAt` and `updatedAt` timestamps
+- Use enums for status fields
+- Always use migrations: `npx prisma migrate dev --name migration_name`
+
+---
+
+## Error Handling
+
+- Always use try-catch for async operations
+- Validate user inputs with Zod schemas
+- Return appropriate HTTP status codes
+- Log errors with context
+- Show user-friendly error messages
+
+Example:
+
+```typescript
+try {
+    const result = await prisma.product.create({ data });
+    return Response.json(result, { status: 201 });
+} catch (error) {
+    console.error("Error creating product:", error);
+    return Response.json(
+        { error: "Failed to create product" },
+        { status: 500 },
+    );
+}
+```
+
+---
+
+## Security Guidelines
+
+- Always validate user input with Zod schemas
+- Check authentication and authorization on every API route
+- Use Prisma parameterized queries (automatic)
+- Sanitize user-generated content
+- Implement rate limiting for sensitive endpoints
+- Use HTTPS in production
+
+---
+
+## Performance Optimization
+
+- Minimize 'use client' directives
+- Use Server Components by default
+- Implement code splitting with React.lazy() and Suspense
+- Optimize images (WebP, lazy loading, size attributes)
+- Use React.memo() for expensive components
+- Implement useCallback for event handlers
+- Use useMemo for expensive computations
+- Add database indexes for frequently queried fields
+
+---
+
+## Testing Approach
+
+- Write unit tests for reusable components
+- Test user interactions
+- Test edge cases and error states
+- Mock external dependencies
+- Test API routes with proper authentication
+- Test database operations
+
+### Example Unit Test
+
+```typescript
+// components/products/ProductCard.test.tsx
+import { fireEvent, render, screen } from "@testing-library/react";
+import { ProductCard } from "./ProductCard";
+import { useCart } from "@/hooks/use-cart";
+
+jest.mock("@/hooks/use-cart");
+
+const mockProduct = {
+    id: "1",
+    name: "Test Solar Panel",
+    slug: "test-solar-panel",
+    price: 299.99,
+    // ... other fields
+};
+
+describe("ProductCard", () => {
+    it("renders product information correctly", () => {
+        render(<ProductCard product={mockProduct} />);
+        expect(screen.getByText("Test Solar Panel")).toBeInTheDocument();
+    });
+});
+```
+
+---
+
+## Critical Reminders
+
+1. **ALWAYS** analyze the entire file before making changes
+2. **NEVER** nest unnecessarily - keep code layout clear and professional
+3. **ALWAYS** add both ID and className to major sections
+4. **ALWAYS** use TypeScript for type safety
+5. **ALWAYS** follow the established patterns and conventions
+6. **ALWAYS** test your changes before committing
+7. **ALWAYS** document complex logic
+8. **ALWAYS** consider reusability when creating components
+9. **ALWAYS** follow the DRY (Don't Repeat Yourself) principle
+10. **ALWAYS** maintain code consistency throughout the project
+
+---
+
+## Quick Reference
+
+### Naming Conventions
+
+- IDs: `kebab-case` → `product-grid`
+- Classes: `BEM` → `product-card__image`
+- Components: `PascalCase` → `ProductCard`
+- Files: `kebab-case` → `product-card.tsx`
+- Variables/Functions: `camelCase` → `getProducts`
+- Constants: `UPPER_SNAKE_CASE` → `MAX_ITEMS`
+- Types/Interfaces: `PascalCase` → `ProductProps`
+
+### Common Patterns
+
+#### Zustand Store
+
+```typescript
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+interface Store {
+    items: Item[];
+    addItem: (item: Item) => void;
+}
+
+export const useStore = create<Store>()(
+    persist(
+        (set) => ({
+            items: [],
+            addItem: (item) =>
+                set((state) => ({ items: [...state.items, item] })),
+        }),
+        { name: "store-storage" },
+    ),
+);
+```
+
+#### Form with Validation
+
+```typescript
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const schema = z.object({
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Invalid email"),
+});
+
+function FormComponent() {
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(schema),
+    });
+
+    // ... form implementation
+}
+```
+
+---
+
+## Daily Coding Checklist
+
+**Before writing code:**
+
+- [ ] Check if component exists in `/components`
+- [ ] Identify reusable patterns
+- [ ] Plan the change (replace/extend/refactor)
+
+**While writing code:**
+
+- [ ] Add IDs to all major sections
+- [ ] Use BEM naming for classes
+- [ ] Add TypeScript interfaces
+- [ ] Use Tailwind for utilities
+- [ ] Use Stylus for complex styles
+- [ ] Follow import order
+- [ ] Add error handling
+
+**Before committing:**
+
+- [ ] Verify no unnecessary nesting
+- [ ] Check naming conventions
+- [ ] Ensure component is reusable
+- [ ] Remove console.logs
+- [ ] Add necessary comments
+
+---
+
+## Deployment Checklist
+
+### Pre-Deployment Steps
+
+1. ✅ Run all tests: `npm run test`
+2. ✅ Check TypeScript: `npm run type-check`
+3. ✅ Lint code: `npm run lint`
+4. ✅ Build production: `npm run build`
+5. ✅ Test production build locally: `npm run start`
+6. ✅ Run database migrations: `npx prisma migrate deploy`
+7. ✅ Configure Stripe webhooks endpoint
+8. ✅ Set up monitoring (Sentry)
+9. ✅ Configure CDN for static assets
+
+### Environment Variables
+
+```bash
+DATABASE_URL="postgresql://..."
+NEXTAUTH_URL="https://yourdomain.com"
+NEXTAUTH_SECRET="production-secret"
+STRIPE_PUBLIC_KEY="pk_live_..."
+STRIPE_SECRET_KEY="sk_live_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+AWS_ACCESS_KEY_ID="..."
+AWS_SECRET_ACCESS_KEY="..."
+AWS_S3_BUCKET="..."
+```
+
+---
+
+## Integration with Documentation
+
+This rule file works in conjunction with:
+
+- **PROJECT_PLAN.md**: Overall project structure and phases
+- **DEVELOPMENT_RULES.md**: Detailed development guidelines
+- **.cursorrules**: Main cursor configuration (this file)
+
+When working on this project:
+
+1. Reference this file for day-to-day coding decisions
+2. Check PROJECT_PLAN.md for feature implementation order
+3. Consult DEVELOPMENT_RULES.md for detailed specifications
+
+---
+
+## Project Structure
+
+```
+/
+├── app/
+│   ├── (public)/              # Public routes
+│   ├── (auth)/                # Auth routes
+│   ├── (customer)/            # Customer routes
+│   ├── (vendor)/              # Vendor routes
+│   ├── (admin)/               # Admin routes
+│   └── api/                   # API routes
+├── components/
+│   ├── ui/                    # Base UI components
+│   ├── layout/                # Layout components
+│   ├── products/              # Product components
+│   ├── vendors/               # Vendor components
+│   └── dashboard/             # Dashboard components
+├── lib/
+│   ├── prisma.ts
+│   ├── stripe.ts
+│   ├── auth.ts
+│   └── utils.ts
+├── hooks/
+├── types/
+├── styles/
+├── prisma/
+│   └── schema.prisma
+└── public/
+```
+
+2. Check PROJECT_PLAN.md for feature implementation order
+3. Consult DEVELOPMENT_RULES.md for detailed specifications

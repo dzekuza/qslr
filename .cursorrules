@@ -1,0 +1,22 @@
+# Solar Panel B2B/B2C Marketplace - Cursor AI Rules
+
+> **📍 READ THIS**: All comprehensive rules are now in `.cursor/rules/rule.mdc`
+>
+> This file is kept for backward compatibility but the main rules file is the
+> source of truth.
+
+## Quick Reference
+
+For complete rules and guidelines, see: **`.cursor/rules/rule.mdc`**
+
+### Critical Workflow:
+
+```
+1. ANALYZE → 2. IDENTIFY → 3. PLAN → 4. IMPLEMENT → 5. VERIFY
+```
+
+### Documentation:
+
+- **Main Rules**: `.cursor/rules/rule.mdc` ⭐ (Primary source)
+- **Project Plan**: `PROJECT_PLAN.md` (Development phases)
+- **Dev Guidelines**: `DEVELOPMENT_RULES.md` (Conventions & standards)
