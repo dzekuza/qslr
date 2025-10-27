@@ -75,12 +75,15 @@ export default function VendorDashboard() {
             <AppSidebar />
             <SidebarInset>
                 <SiteHeader />
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                <div className="flex flex-1 flex-col gap-4 p-4">
                     <div className="mx-auto w-full max-w-7xl">
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-3xl font-bold tracking-tight">Vendor Dashboard</h1>
+                            <h1 className="text-3xl font-bold tracking-tight">
+                                Vendor Dashboard
+                            </h1>
                             <p className="text-muted-foreground">
-                                Welcome back! Here's an overview of your business.
+                                Welcome back! Here's an overview of your
+                                business.
                             </p>
                         </div>
                         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -92,7 +95,9 @@ export default function VendorDashboard() {
                                     <TrendingUp className="h-4 w-4 text-muted-foreground" />
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">$45,231</div>
+                                    <div className="text-2xl font-bold">
+                                        $45,231
+                                    </div>
                                     <p className="text-xs text-muted-foreground">
                                         +20.1% from last month
                                     </p>
@@ -106,7 +111,9 @@ export default function VendorDashboard() {
                                     <ShoppingCart className="h-4 w-4 text-muted-foreground" />
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">1,234</div>
+                                    <div className="text-2xl font-bold">
+                                        1,234
+                                    </div>
                                     <p className="text-xs text-muted-foreground">
                                         +12% from last month
                                     </p>
@@ -120,7 +127,9 @@ export default function VendorDashboard() {
                                     <Package className="h-4 w-4 text-muted-foreground" />
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">156</div>
+                                    <div className="text-2xl font-bold">
+                                        156
+                                    </div>
                                     <p className="text-xs text-muted-foreground">
                                         12 active products
                                     </p>
@@ -146,7 +155,8 @@ export default function VendorDashboard() {
                                 <CardHeader>
                                     <CardTitle>Revenue Overview</CardTitle>
                                     <CardDescription>
-                                        Sales performance over the last 12 months
+                                        Sales performance over the last 12
+                                        months
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
@@ -166,31 +176,49 @@ export default function VendorDashboard() {
                                             <div className="flex items-center gap-3">
                                                 <CheckCircle className="h-5 w-5 text-green-500" />
                                                 <div>
-                                                    <p className="text-sm font-medium">Order #1234</p>
-                                                    <p className="text-xs text-muted-foreground">2 hours ago</p>
+                                                    <p className="text-sm font-medium">
+                                                        Order #1234
+                                                    </p>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        2 hours ago
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <Badge variant="secondary">Delivered</Badge>
+                                            <Badge variant="secondary">
+                                                Delivered
+                                            </Badge>
                                         </div>
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-3">
                                                 <Clock className="h-5 w-5 text-yellow-500" />
                                                 <div>
-                                                    <p className="text-sm font-medium">Order #1233</p>
-                                                    <p className="text-xs text-muted-foreground">5 hours ago</p>
+                                                    <p className="text-sm font-medium">
+                                                        Order #1233
+                                                    </p>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        5 hours ago
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <Badge variant="outline">Processing</Badge>
+                                            <Badge variant="outline">
+                                                Processing
+                                            </Badge>
                                         </div>
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-3">
                                                 <Package className="h-5 w-5 text-blue-500" />
                                                 <div>
-                                                    <p className="text-sm font-medium">Order #1232</p>
-                                                    <p className="text-xs text-muted-foreground">Yesterday</p>
+                                                    <p className="text-sm font-medium">
+                                                        Order #1232
+                                                    </p>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        Yesterday
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <Badge variant="outline">Shipped</Badge>
+                                            <Badge variant="outline">
+                                                Shipped
+                                            </Badge>
                                         </div>
                                     </div>
                                 </CardContent>

@@ -177,7 +177,7 @@ const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$pr
 });
 const config = {
     matcher: [
-        '/((?!_next/static|_next/image|favicon.ico).*)'
+        '/((?!_next/static|_next/image|favicon.ico|.*\\.mp4|.*\\.jpg|.*\\.png|.*\\.svg|.*\\.webp|.*\\.gif|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot).*)'
     ]
 };
 }),

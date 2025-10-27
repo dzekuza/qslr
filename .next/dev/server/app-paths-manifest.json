@@ -1,23 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/admin/products/page": "app/admin/products/page.js",
-  "/admin/vendors/page": "app/admin/vendors/page.js",
-  "/api/admin/products/route": "app/api/admin/products/route.js",
-  "/api/admin/vendors/[id]/status/route": "app/api/admin/vendors/[id]/status/route.js",
-  "/api/admin/vendors/route": "app/api/admin/vendors/route.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/auth/register/route": "app/api/auth/register/route.js",
-  "/api/warehouses/route": "app/api/warehouses/route.js",
-  "/dashboard/page": "app/dashboard/page.js",
   "/login/page": "app/login/page.js",
-  "/page": "app/page.js",
-  "/register-vendor/page": "app/register-vendor/page.js",
-  "/register/page": "app/register/page.js",
-  "/vendor/analytics/page": "app/vendor/analytics/page.js",
-  "/vendor/orders/page": "app/vendor/orders/page.js",
-  "/vendor/page": "app/vendor/page.js",
-  "/vendor/products/page": "app/vendor/products/page.js",
-  "/vendor/stripe/page": "app/vendor/stripe/page.js",
-  "/vendor/warehouses/page": "app/vendor/warehouses/page.js"
+  "/register/page": "app/register/page.js"
 }

@@ -1,174 +1,189 @@
-import * as React from "react"
-import { GalleryVerticalEnd } from "lucide-react"
+"use client";
 
+import * as React from "react";
+import {
+  BarChart,
+  FileText,
+  LifeBuoy,
+  Package,
+  Send,
+  Settings,
+  Shield,
+  ShoppingCart,
+  Users,
+  Warehouse,
+} from "lucide-react";
+import { useSession } from "next-auth/react";
+
+import { NavMain } from "@/components/nav-main";
+import { NavProjects } from "@/components/nav-projects";
+import { NavSecondary } from "@/components/nav-secondary";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Building Your Application",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Community",
-      url: "#",
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
-        },
-      ],
-    },
-  ],
-}
+// Vendor navigation
+const vendorNavMain = [
+  {
+    title: "Dashboard",
+    url: "/vendor",
+    icon: ShoppingCart,
+    isActive: true,
+  },
+  {
+    title: "Products",
+    url: "/vendor/products",
+    icon: Package,
+  },
+  {
+    title: "Warehouses",
+    url: "/vendor/warehouses",
+    icon: Warehouse,
+  },
+  {
+    title: "Settings",
+    url: "/vendor/settings",
+    icon: Settings,
+  },
+];
+
+const vendorNavSecondary = [
+  {
+    title: "Support",
+    url: "/vendor/support",
+    icon: LifeBuoy,
+  },
+  {
+    title: "Feedback",
+    url: "/vendor/feedback",
+    icon: Send,
+  },
+];
+
+const vendorProjects = [
+  {
+    name: "Orders",
+    url: "/vendor/orders",
+    icon: ShoppingCart,
+  },
+  {
+    name: "Analytics",
+    url: "/vendor/analytics",
+    icon: Package,
+  },
+];
+
+// Admin navigation
+const adminNavMain = [
+  {
+    title: "Dashboard",
+    url: "/admin",
+    icon: Shield,
+    isActive: true,
+  },
+  {
+    title: "Vendors",
+    url: "/admin/vendors",
+    icon: Users,
+  },
+  {
+    title: "Products",
+    url: "/admin/products",
+    icon: Package,
+  },
+  {
+    title: "Warehouses",
+    url: "/admin/warehouses",
+    icon: Warehouse,
+  },
+  {
+    title: "Orders",
+    url: "/admin/orders",
+    icon: ShoppingCart,
+  },
+  {
+    title: "Settings",
+    url: "/admin/settings",
+    icon: Settings,
+  },
+];
+
+const adminNavSecondary = [
+  {
+    title: "Support",
+    url: "/admin/support",
+    icon: LifeBuoy,
+  },
+  {
+    title: "Feedback",
+    url: "/admin/feedback",
+    icon: Send,
+  },
+];
+
+const adminProjects = [
+  {
+    name: "Analytics",
+    url: "/admin/analytics",
+    icon: BarChart,
+  },
+  {
+    name: "Reports",
+    url: "/admin/reports",
+    icon: FileText,
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: session } = useSession();
+
+  // Create user data from session
+  const userData = session
+    ? {
+      name: session.user.name || "User",
+      email: session.user.email,
+      avatar: "/avatars/default.jpg",
+    }
+    : {
+      name: "Loading...",
+      email: "loading@example.com",
+      avatar: "/avatars/default.jpg",
+    };
+
+  // Determine navigation based on user role
+  const isAdmin = session?.user?.role === "ADMIN";
+  const navMain = isAdmin ? adminNavMain : vendorNavMain;
+  const navSecondary = isAdmin ? adminNavSecondary : vendorNavSecondary;
+  const projects = isAdmin ? adminProjects : vendorProjects;
+
+  // Determine header content based on role
+  const headerTitle = isAdmin ? "Admin Dashboard" : "Vendor Dashboard";
+  const headerSubtitle = "Solar Marketplace";
+  const headerIcon = isAdmin ? Shield : Package;
+  const headerUrl = isAdmin ? "/admin" : "/vendor";
+
   return (
-    <Sidebar variant="floating" {...props}>
+    <Sidebar variant="inset" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href={headerUrl}>
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GalleryVerticalEnd className="size-4" />
+                  {React.createElement(headerIcon, { className: "size-4" })}
                 </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Documentation</span>
-                  <span className="">v1.0.0</span>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-semibold">
+                    {headerTitle}
+                  </span>
+                  <span className="truncate text-xs">{headerSubtitle}</span>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -176,31 +191,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarMenu className="gap-2">
-            {data.navMain.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <a href={item.url} className="font-medium">
-                    {item.title}
-                  </a>
-                </SidebarMenuButton>
-                {item.items?.length ? (
-                  <SidebarMenuSub className="ml-0 border-l-0 px-1.5">
-                    {item.items.map((item) => (
-                      <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton asChild isActive={item.isActive}>
-                          <a href={item.url}>{item.title}</a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                ) : null}
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
+        <NavMain items={navMain} />
+        <NavProjects projects={projects} />
+        <NavSecondary items={navSecondary} className="mt-auto" />
       </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={userData} />
+      </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

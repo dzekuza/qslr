@@ -1,281 +1,145 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { customerRegistrationSchema, type CustomerRegistrationFormData } from '@/lib/validations/auth'
-import { Eye, EyeOff, Loader2, CheckCircle } from 'lucide-react'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { SignUpPage } from "@/components/ui/sign-up";
 
 export default function CustomerRegistrationPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
-  const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
+    const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CustomerRegistrationFormData>({
-    resolver: zodResolver(customerRegistrationSchema),
-  })
+    const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setIsLoading(true);
+        setError("");
 
-  const onSubmit = async (data: CustomerRegistrationFormData) => {
-    setIsLoading(true)
-    setError('')
+        try {
+            const formData = new FormData(event.currentTarget);
+            const data = {
+                name: formData.get("name") as string,
+                email: formData.get("email") as string,
+                phone: formData.get("phone") as string,
+                password: formData.get("password") as string,
+                confirmPassword: formData.get("confirmPassword") as string,
+                acceptTerms: formData.get("acceptTerms") === "on",
+            };
 
-    try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...data,
-          role: 'CUSTOMER',
-        }),
-      })
+            // Validate password match
+            if (data.password !== data.confirmPassword) {
+                throw new Error("Passwords do not match");
+            }
 
-      const result = await response.json()
+            const response = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...data,
+                    role: "CUSTOMER",
+                }),
+            });
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Registration failed')
-      }
+            const result = await response.json();
 
-      setSuccess(true)
-      setTimeout(() => {
-        router.push('/login')
-      }, 2000)
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Registration failed. Please try again.')
-    } finally {
-      setIsLoading(false)
-    }
-  }
+            if (!response.ok) {
+                throw new Error(result.error || "Registration failed");
+            }
 
-  if (success) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full">
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-center">
-                <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Registration Successful!</h2>
-                <p className="text-gray-600 mb-4">
-                  Your account has been created successfully. You can now sign in to your account.
-                </p>
-                <Link href="/login">
-                  <Button className="w-full">Go to Sign In</Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    )
-  }
+            setSuccess(true);
+            setTimeout(() => {
+                router.push("/login");
+            }, 2000);
+        } catch (error) {
+            setError(
+                error instanceof Error
+                    ? error.message
+                    : "Registration failed. Please try again.",
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Solar Panel Marketplace</h1>
-          <p className="mt-2 text-sm text-gray-600">Create your customer account</p>
-        </div>
+    const handleGoogleSignUp = () => {
+        // TODO: Implement Google OAuth
+        console.log("Google sign up clicked");
+    };
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Customer Registration</CardTitle>
-            <CardDescription>
-              Create your account to start shopping for solar panels
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              {error && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md text-sm">
-                  {error}
+    const handleSignIn = () => {
+        router.push("/login");
+    };
+
+    if (success) {
+        return (
+            <div className="bg-background text-foreground min-h-screen flex items-center justify-center">
+                <div className="bg-card p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+                    <div className="mb-4">
+                        <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg
+                                className="w-8 h-8 text-green-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M5 13l4 4L19 7"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2">
+                        Registration Successful!
+                    </h2>
+                    <p className="text-muted-foreground mb-6">
+                        Your account has been created successfully. Redirecting to
+                        sign in...
+                    </p>
+                    <button
+                        onClick={() => router.push("/login")}
+                        className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                    >
+                        Go to Sign In
+                    </button>
                 </div>
-              )}
-
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                  Full Name *
-                </label>
-                <Input
-                  id="name"
-                  type="text"
-                  autoComplete="name"
-                  placeholder="Enter your full name"
-                  {...register('name')}
-                  className={errors.name ? 'border-red-500' : ''}
-                />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address *
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="Enter your email"
-                  {...register('email')}
-                  className={errors.email ? 'border-red-500' : ''}
-                />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone Number
-                </label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  placeholder="Enter your phone number"
-                  {...register('phone')}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                  Password *
-                </label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete="new-password"
-                    placeholder="Create a password"
-                    {...register('password')}
-                    className={errors.password ? 'border-red-500 pr-10' : 'pr-10'}
-                  />
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-gray-400" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-gray-400" />
-                    )}
-                  </button>
-                </div>
-                {errors.password && (
-                  <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                  Confirm Password *
-                </label>
-                <div className="relative">
-                  <Input
-                    id="confirmPassword"
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    autoComplete="new-password"
-                    placeholder="Confirm your password"
-                    {...register('confirmPassword')}
-                    className={errors.confirmPassword ? 'border-red-500 pr-10' : 'pr-10'}
-                  />
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
-                    {showConfirmPassword ? (
-                      <EyeOff className="h-4 w-4 text-gray-400" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-gray-400" />
-                    )}
-                  </button>
-                </div>
-                {errors.confirmPassword && (
-                  <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
-                )}
-              </div>
-
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="acceptTerms"
-                    type="checkbox"
-                    {...register('acceptTerms')}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label htmlFor="acceptTerms" className="text-gray-700">
-                    I agree to the{' '}
-                    <Link href="/terms" className="text-blue-600 hover:text-blue-500">
-                      Terms and Conditions
-                    </Link>{' '}
-                    and{' '}
-                    <Link href="/privacy" className="text-blue-600 hover:text-blue-500">
-                      Privacy Policy
-                    </Link>
-                  </label>
-                  {errors.acceptTerms && (
-                    <p className="mt-1 text-sm text-red-600">{errors.acceptTerms.message}</p>
-                  )}
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Creating Account...
-                  </>
-                ) : (
-                  'Create Account'
-                )}
-              </Button>
-            </form>
-
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Already have an account?</span>
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <Link href="/login">
-                  <Button variant="outline" className="w-full">
-                    Sign In Instead
-                  </Button>
-                </Link>
-              </div>
             </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  )
+        );
+    }
+
+    return (
+        <div className="bg-background text-foreground min-h-screen">
+            <SignUpPage
+                title={
+                    <span className="font-light text-foreground tracking-tighter">
+                        Welcome to{" "}
+                        <span className="font-semibold">Solar Marketplace</span>
+                    </span>
+                }
+                description="Create your account and start your solar journey today"
+                heroVideoSrc="/sun_store_header.mp4"
+                onSignUp={handleSignUp}
+                onGoogleSignUp={handleGoogleSignUp}
+                onSignIn={handleSignIn}
+            />
+            {error && (
+                <div className="fixed top-4 right-4 bg-destructive text-destructive-foreground px-4 py-2 rounded-lg shadow-lg z-50">
+                    {error}
+                </div>
+            )}
+            {isLoading && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-background rounded-lg p-6 flex items-center gap-3">
+                        <div className="h-5 w-5 border-2 border-primary border-t-transparent rounded-full animate-spin">
+                        </div>
+                        <p>Creating account...</p>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
 }
