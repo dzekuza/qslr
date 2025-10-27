@@ -33,11 +33,17 @@ import { Badge } from "@/components/ui/badge";
 interface Warehouse {
     id: string;
     name: string;
-    address: string;
+    address?: string;
+    street: string;
     city: string;
-    state: string;
-    postalCode: string;
+    state?: string;
+    postalCode?: string;
+    zipCode: string;
     country: string;
+    contactName: string;
+    email: string;
+    phone: string;
+    apartment?: string;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;
@@ -56,10 +62,16 @@ export default function VendorWarehousesPage() {
     const [formData, setFormData] = useState({
         name: "",
         address: "",
+        street: "",
         city: "",
         state: "",
         postalCode: "",
+        zipCode: "",
         country: "US",
+        contactName: "",
+        email: "",
+        phone: "",
+        apartment: "",
         isActive: true,
     });
 
@@ -121,11 +133,17 @@ export default function VendorWarehousesPage() {
         setEditingWarehouse(warehouse);
         setFormData({
             name: warehouse.name,
-            address: warehouse.address,
+            address: warehouse.address || "",
+            street: warehouse.street || "",
             city: warehouse.city,
-            state: warehouse.state,
-            postalCode: warehouse.postalCode,
+            state: warehouse.state || "",
+            postalCode: warehouse.postalCode || "",
+            zipCode: warehouse.zipCode || "",
             country: warehouse.country,
+            contactName: warehouse.contactName || "",
+            email: warehouse.email || "",
+            phone: warehouse.phone || "",
+            apartment: warehouse.apartment || "",
             isActive: warehouse.isActive,
         });
         setDialogOpen(true);
@@ -151,10 +169,16 @@ export default function VendorWarehousesPage() {
         setFormData({
             name: "",
             address: "",
+            street: "",
             city: "",
             state: "",
             postalCode: "",
+            zipCode: "",
             country: "US",
+            contactName: "",
+            email: "",
+            phone: "",
+            apartment: "",
             isActive: true,
         });
     };

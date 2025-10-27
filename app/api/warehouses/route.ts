@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
       data: {
         vendorId: vendor.id,
         name,
-        street: street || address || '',
+        street: street || '',
         city,
         zipCode: zipCode || postalCode || '',
         country: country || 'US',
