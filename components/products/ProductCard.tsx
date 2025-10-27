@@ -39,11 +39,9 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="flex flex-wrap gap-1 items-center justify-center">
           {/* Power Badge - Green */}
           <div className="bg-[#00b56a] flex items-center gap-1.5 px-2 py-1 rounded text-white">
-            <Image
+            <img
               src="/assets/76ede529da07d1e31a85229e3153ff87a6d2cdfe.svg"
               alt="Power icon"
-              width={12}
-              height={12}
               className="w-3 h-3"
             />
             <span className="text-xs font-medium">
@@ -56,11 +54,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
           {/* Type Badge - Gray */}
           <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
-            <Image
+            <img
               src="/assets/f90db6c737814d5a3e8aeb19b199986a961e2500.svg"
               alt="Type icon"
-              width={14}
-              height={14}
               className="w-3.5 h-3.5"
             />
             <span className="text-xs font-medium text-[#787878]">
@@ -70,11 +66,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
           {/* Color Badge - Gray */}
           <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
-            <Image
+            <img
               src="/assets/e37e2f55d0b3b1ff471b6ae0293e708fd1d7c945.svg"
               alt="Color icon"
-              width={14}
-              height={14}
               className="w-3.5 h-3.5"
             />
             <span className="text-xs font-medium text-[#787878]">
@@ -84,11 +78,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
           {/* Dimensions Badge - Gray */}
           <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
-            <Image
+            <img
               src="/assets/2b8314611987c4a602a282b9d038bf48fe8bc6c7.svg"
               alt="Dimensions icon"
-              width={14}
-              height={14}
               className="w-3.5 h-3.5"
             />
             <span className="text-xs font-medium text-[#787878]">
