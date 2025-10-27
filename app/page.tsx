@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -8,18 +10,24 @@ export default function Home() {
         </p>
         
         <div className="space-x-4">
-          <a
+          <Link
             href="/login"
             className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90"
           >
             Login
-          </a>
-          <a
+          </Link>
+          <Link
             href="/register"
             className="inline-block px-6 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90"
           >
-            Register
-          </a>
+            Customer Sign Up
+          </Link>
+          <Link
+            href="/register-vendor"
+            className="inline-block px-6 py-3 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90"
+          >
+            Vendor Sign Up
+          </Link>
         </div>
       </div>
     </div>

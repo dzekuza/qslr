@@ -76,12 +76,31 @@ model Vendor {
     updatedAt       DateTime     @updatedAt
     approvedAt      DateTime?
 
-    user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-    products Product[]
-    orders   Order[]
-    payouts  Payout[]
+    user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    products   Product[]
+    orders     Order[]
+    payouts    Payout[]
+    warehouses Warehouse[]
 
     @@map("vendors")
+}
+
+model Warehouse {
+    id         String   @id @default(cuid())
+    vendorId   String
+    name       String
+    address    String
+    city       String
+    state      String
+    postalCode String
+    country    String   @default("US")
+    isActive   Boolean  @default(true)
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    vendor Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+    @@map("warehouses")
 }
 
 model Product {
