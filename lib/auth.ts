@@ -1,10 +1,10 @@
-import NextAuth, { NextAuthConfig } from 'next-auth'
-import Credentials from 'next-auth/providers/credentials'
+import NextAuth, { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import { prisma } from './prisma'
 import { UserRole } from '@prisma/client'
 
-export const authConfig: NextAuthConfig = {
+export const authOptions: NextAuthOptions = {
     pages: {
         signIn: '/login',
         error: '/login'
@@ -26,7 +26,7 @@ export const authConfig: NextAuthConfig = {
         }
     },
     providers: [
-        Credentials({
+        CredentialsProvider({
             name: 'credentials',
             credentials: {
                 email: { label: 'Email', type: 'email' },
@@ -71,4 +71,4 @@ export const authConfig: NextAuthConfig = {
     secret: process.env.NEXTAUTH_SECRET
 }
 
-export const { handlers, signIn, signOut, auth } = NextAuth(authConfig)
+export default NextAuth(authOptions)

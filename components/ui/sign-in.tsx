@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { LogoLoop } from "@/components/LogoLoop";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 
 // --- HELPER COMPONENTS (ICONS) ---
 
@@ -144,51 +146,57 @@ export const SignInPage: React.FC<SignInPageProps> = ({
                         </p>
 
                         <form className="space-y-5" onSubmit={onSignIn}>
-                            <div className="animate-element animate-delay-300">
-                                <label className="text-sm font-medium text-muted-foreground">
-                                    Email Address
-                                </label>
-                                <GlassInputWrapper>
-                                    <input
-                                        name="email"
-                                        type="email"
-                                        placeholder="Enter your email address"
-                                        className="w-full bg-transparent text-sm p-4 rounded-2xl focus:outline-none"
-                                    />
-                                </GlassInputWrapper>
-                            </div>
-
-                            <div className="animate-element animate-delay-400">
-                                <label className="text-sm font-medium text-muted-foreground">
-                                    Password
-                                </label>
-                                <GlassInputWrapper>
-                                    <div className="relative">
-                                        <input
-                                            name="password"
-                                            type={showPassword
-                                                ? "text"
-                                                : "password"}
-                                            placeholder="Enter your password"
-                                            className="w-full bg-transparent text-sm p-4 pr-12 rounded-2xl focus:outline-none"
+                            <FieldGroup className="space-y-5">
+                                <Field className="animate-element animate-delay-300">
+                                    <FieldLabel htmlFor="email">
+                                        Email Address
+                                    </FieldLabel>
+                                    <GlassInputWrapper>
+                                        <Input
+                                            id="email"
+                                            name="email"
+                                            type="email"
+                                            placeholder="Enter your email address"
+                                            className="w-full bg-transparent text-sm p-4 rounded-2xl focus:outline-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-12"
                                         />
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setShowPassword(!showPassword)}
-                                            className="absolute inset-y-0 right-3 flex items-center"
-                                        >
-                                            {showPassword
-                                                ? (
-                                                    <EyeOff className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-                                                )
-                                                : (
-                                                    <Eye className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-                                                )}
-                                        </button>
-                                    </div>
-                                </GlassInputWrapper>
-                            </div>
+                                    </GlassInputWrapper>
+                                </Field>
+
+                                <Field className="animate-element animate-delay-400">
+                                    <FieldLabel htmlFor="password">
+                                        Password
+                                    </FieldLabel>
+                                    <GlassInputWrapper>
+                                        <div className="relative">
+                                            <Input
+                                                id="password"
+                                                name="password"
+                                                type={showPassword
+                                                    ? "text"
+                                                    : "password"}
+                                                placeholder="Enter your password"
+                                                className="w-full bg-transparent text-sm p-4 pr-12 rounded-2xl focus:outline-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-12"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setShowPassword(
+                                                        !showPassword,
+                                                    )}
+                                                className="absolute inset-y-0 right-3 flex items-center"
+                                            >
+                                                {showPassword
+                                                    ? (
+                                                        <EyeOff className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+                                                    )
+                                                    : (
+                                                        <Eye className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+                                                    )}
+                                            </button>
+                                        </div>
+                                    </GlassInputWrapper>
+                                </Field>
+                            </FieldGroup>
 
                             <div className="animate-element animate-delay-500 flex items-center justify-between text-sm">
                                 <label className="flex items-center gap-3 cursor-pointer">
@@ -308,70 +316,46 @@ export const SignInPage: React.FC<SignInPageProps> = ({
                                 }}
                             />
                         )}
-                    </div>
-                    {/* LogoLoop at bottom */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-full px-8 z-10">
-                        <LogoLoop
-                            logos={[
-                                {
-                                    src: "https://via.placeholder.com/120x40/3b82f6/ffffff?text=SolarTech",
-                                    alt: "SolarTech",
-                                },
-                                {
-                                    src: "https://via.placeholder.com/120x40/10b981/ffffff?text=GreenEnergy",
-                                    alt: "GreenEnergy",
-                                },
-                                {
-                                    src: "https://via.placeholder.com/120x40/f59e0b/ffffff?text=SunPower",
-                                    alt: "SunPower",
-                                },
-                                {
-                                    src: "https://via.placeholder.com/120x40/ef4444/ffffff?text=EcoSolar",
-                                    alt: "EcoSolar",
-                                },
-                                {
-                                    src: "https://via.placeholder.com/120x40/8b5cf6/ffffff?text=Renewable+Pro",
-                                    alt: "RenewablePro",
-                                },
-                                {
-                                    src: "https://via.placeholder.com/120x40/06b6d4/ffffff?text=CleanTech",
-                                    alt: "CleanTech",
-                                },
-                            ]}
-                            speed={60}
-                            direction="left"
-                            logoHeight={32}
-                            gap={24}
-                            pauseOnHover={true}
-                            fadeOut={true}
-                            className="opacity-80"
-                        />
-                    </div>
 
-                    {testimonials.length > 0 && (
-                        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-4 px-8 w-full justify-center z-10">
-                            <TestimonialCard
-                                testimonial={testimonials[0]}
-                                delay="animate-delay-1000"
+                        {/* LogoLoop inside video container */}
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-full z-10">
+                            <LogoLoop
+                                logos={[
+                                    {
+                                        src: "/download.svg",
+                                        alt: "SolarTech",
+                                    },
+                                    {
+                                        src: "/download.svg",
+                                        alt: "GreenEnergy",
+                                    },
+                                    {
+                                        src: "/download.svg",
+                                        alt: "SunPower",
+                                    },
+                                    {
+                                        src: "/download.svg",
+                                        alt: "EcoSolar",
+                                    },
+                                    {
+                                        src: "/download.svg",
+                                        alt: "RenewablePro",
+                                    },
+                                    {
+                                        src: "/download.svg",
+                                        alt: "CleanTech",
+                                    },
+                                ]}
+                                speed={60}
+                                direction="left"
+                                logoHeight={32}
+                                gap={24}
+                                pauseOnHover={true}
+                                fadeOut={false}
+                                className="opacity-80 [&_img]:brightness-0 [&_img]:invert"
                             />
-                            {testimonials[1] && (
-                                <div className="hidden xl:flex">
-                                    <TestimonialCard
-                                        testimonial={testimonials[1]}
-                                        delay="animate-delay-1200"
-                                    />
-                                </div>
-                            )}
-                            {testimonials[2] && (
-                                <div className="hidden 2xl:flex">
-                                    <TestimonialCard
-                                        testimonial={testimonials[2]}
-                                        delay="animate-delay-1400"
-                                    />
-                                </div>
-                            )}
                         </div>
-                    )}
+                    </div>
                 </section>
             )}
         </div>

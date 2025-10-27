@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth()
+    const session = await getServerSession(authOptions)
 
     if (!session) {
       return NextResponse.json(
@@ -43,7 +44,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth()
+    const session = await getServerSession(authOptions)
 
     if (!session) {
       return NextResponse.json(
@@ -72,17 +73,37 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { name, address, city, state, postalCode, country, isActive } = body
+    const { 
+      name, 
+      address, 
+      city, 
+      state, 
+      postalCode, 
+      country, 
+      isActive,
+      street,
+      zipCode,
+      contactName,
+      email,
+      phone,
+      apartment
+    } = body
 
     const warehouse = await prisma.warehouse.create({
       data: {
         vendorId: vendor.id,
         name,
-        address,
+        street: street || address || '',
         city,
-        state,
-        postalCode,
+        zipCode: zipCode || postalCode || '',
         country: country || 'US',
+        contactName: contactName || '',
+        email: email || '',
+        phone: phone || '',
+        apartment: apartment || null,
+        address: address || null,
+        state: state || null,
+        postalCode: postalCode || null,
         isActive: isActive !== undefined ? isActive : true,
       },
     })

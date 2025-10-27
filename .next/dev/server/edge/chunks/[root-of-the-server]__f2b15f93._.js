@@ -22,16 +22,12 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$api$2f$server$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/next/dist/esm/api/server.js [middleware-edge] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/esm/server/web/exports/index.js [middleware-edge] (ecmascript)");
-(()=>{
-    const e = new Error("Cannot find module '@/lib/auth'");
-    e.code = 'MODULE_NOT_FOUND';
-    throw e;
-})();
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$middleware$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-auth/middleware.js [middleware-edge] (ecmascript)");
 ;
 ;
-const __TURBOPACK__default__export__ = auth((req)=>{
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$middleware$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["withAuth"])(function middleware(req) {
     const { pathname } = req.nextUrl;
-    const session = req.auth;
+    const session = req.nextauth.token;
     // Public routes
     const publicRoutes = [
         '/',
@@ -54,21 +50,40 @@ const __TURBOPACK__default__export__ = auth((req)=>{
     }
     // Admin routes
     if (pathname.startsWith('/admin')) {
-        if (session.user.role !== 'ADMIN') {
+        if (session.role !== 'ADMIN') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/unauthorized', req.url));
         }
     }
     // Vendor routes
     if (pathname.startsWith('/vendor')) {
-        if (session.user.role !== 'VENDOR' && session.user.role !== 'ADMIN') {
+        if (session.role !== 'VENDOR' && session.role !== 'ADMIN') {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/unauthorized', req.url));
         }
     }
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
+}, {
+    callbacks: {
+        authorized: ({ token, req })=>{
+            const { pathname } = req.nextUrl;
+            // Public routes
+            const publicRoutes = [
+                '/',
+                '/login',
+                '/register',
+                '/register-vendor',
+                '/products'
+            ];
+            const isPublicRoute = publicRoutes.some((route)=>pathname === route || pathname.startsWith(`${route}/`));
+            if (isPublicRoute || pathname.startsWith('/api/auth')) {
+                return true;
+            }
+            return !!token;
+        }
+    }
 });
 const config = {
     matcher: [
-        '/((?!_next/static|_next/image|favicon.ico).*)'
+        '/((?!_next/static|_next/image|favicon.ico|.*\\.mp4|.*\\.jpg|.*\\.png|.*\\.svg|.*\\.webp|.*\\.gif|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot).*)'
     ]
 };
 }),
