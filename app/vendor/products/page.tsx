@@ -34,7 +34,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Plus, Edit, Trash2, Package } from "lucide-react";
+import { Edit, Package, Plus, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/ui/image-upload";
@@ -92,7 +92,7 @@ export default function VendorProductsPage() {
         warranty: "",
         dimensions: "",
         weight: "",
-        lowStockThreshold: "10"
+        lowStockThreshold: "10",
     });
 
     // Image state
@@ -142,17 +142,31 @@ export default function VendorProductsPage() {
                 body: JSON.stringify({
                     ...formData,
                     price: parseFloat(formData.price),
-                    compareAtPrice: formData.compareAtPrice ? parseFloat(formData.compareAtPrice) : null,
-                    costPerItem: formData.costPerItem ? parseFloat(formData.costPerItem) : null,
+                    compareAtPrice: formData.compareAtPrice
+                        ? parseFloat(formData.compareAtPrice)
+                        : null,
+                    costPerItem: formData.costPerItem
+                        ? parseFloat(formData.costPerItem)
+                        : null,
                     stock: parseInt(formData.stock),
                     lowStockThreshold: parseInt(formData.lowStockThreshold),
-                    wattage: formData.wattage ? parseInt(formData.wattage) : null,
-                    voltage: formData.voltage ? parseInt(formData.voltage) : null,
-                    efficiency: formData.efficiency ? parseFloat(formData.efficiency) : null,
-                    warranty: formData.warranty ? parseInt(formData.warranty) : null,
-                    weight: formData.weight ? parseFloat(formData.weight) : null,
+                    wattage: formData.wattage
+                        ? parseInt(formData.wattage)
+                        : null,
+                    voltage: formData.voltage
+                        ? parseInt(formData.voltage)
+                        : null,
+                    efficiency: formData.efficiency
+                        ? parseFloat(formData.efficiency)
+                        : null,
+                    warranty: formData.warranty
+                        ? parseInt(formData.warranty)
+                        : null,
+                    weight: formData.weight
+                        ? parseFloat(formData.weight)
+                        : null,
                     images: productImages,
-                    thumbnail: productImages[0] || null
+                    thumbnail: productImages[0] || null,
                 }),
             });
 
@@ -185,7 +199,7 @@ export default function VendorProductsPage() {
             warranty: product.warranty?.toString() || "",
             dimensions: product.dimensions || "",
             weight: product.weight?.toString() || "",
-            lowStockThreshold: product.lowStockThreshold.toString()
+            lowStockThreshold: product.lowStockThreshold.toString(),
         });
         setProductImages(product.images || []);
         setDialogOpen(true);
@@ -225,13 +239,13 @@ export default function VendorProductsPage() {
             warranty: "",
             dimensions: "",
             weight: "",
-            lowStockThreshold: "10"
+            lowStockThreshold: "10",
         });
         setProductImages([]);
     };
 
     const handleFormChange = (field: string, value: string) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
+        setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
     const getStatusBadgeVariant = (status: string) => {
@@ -248,7 +262,11 @@ export default function VendorProductsPage() {
     };
 
     if (status === "loading" || loading) {
-        return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                Loading...
+            </div>
+        );
     }
 
     if (!session) {
@@ -268,10 +286,13 @@ export default function VendorProductsPage() {
                                 Manage your product inventory
                             </p>
                         </div>
-                        <Dialog open={dialogOpen} onOpenChange={(open) => {
-                            setDialogOpen(open);
-                            if (!open) resetForm();
-                        }}>
+                        <Dialog
+                            open={dialogOpen}
+                            onOpenChange={(open) => {
+                                setDialogOpen(open);
+                                if (!open) resetForm();
+                            }}
+                        >
                             <DialogTrigger asChild>
                                 <Button onClick={() => setDialogOpen(true)}>
                                     <Plus className="mr-2 h-4 w-4" />
@@ -281,45 +302,69 @@ export default function VendorProductsPage() {
                             <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
                                 <DialogHeader>
                                     <DialogTitle>
-                                        {editingProduct ? "Edit Product" : "Add New Product"}
+                                        {editingProduct
+                                            ? "Edit Product"
+                                            : "Add New Product"}
                                     </DialogTitle>
                                     <DialogDescription>
-                                        Enter the product details below. All fields marked with * are required.
+                                        Enter the product details below. All
+                                        fields marked with * are required.
                                     </DialogDescription>
                                 </DialogHeader>
                                 <form onSubmit={handleSubmit}>
-                                    <div className="grid gap-4 py-4">
+                                    <div className="grid gap-4">
                                         {/* Basic Information */}
                                         <div className="space-y-4">
-                                            <h3 className="text-lg font-medium">Basic Information</h3>
-                                            
-                                            <div className="space-y-2">
-                                                <Label htmlFor="name">Product Name *</Label>
+                                            <h3 className="text-lg font-medium">
+                                                Basic Information
+                                            </h3>
+
+                                            <div className="space-y-2 mt-0">
+                                                <Label htmlFor="name">
+                                                    Product Name *
+                                                </Label>
                                                 <Input
                                                     id="name"
                                                     value={formData.name}
-                                                    onChange={(e) => handleFormChange("name", e.target.value)}
+                                                    onChange={(e) =>
+                                                        handleFormChange(
+                                                            "name",
+                                                            e.target.value,
+                                                        )}
                                                     placeholder="e.g., Solar Panel 400W Monocrystalline"
                                                     required
                                                 />
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="shortDescription">Short Description</Label>
+                                                <Label htmlFor="shortDescription">
+                                                    Short Description
+                                                </Label>
                                                 <Input
                                                     id="shortDescription"
-                                                    value={formData.shortDescription}
-                                                    onChange={(e) => handleFormChange("shortDescription", e.target.value)}
+                                                    value={formData
+                                                        .shortDescription}
+                                                    onChange={(e) =>
+                                                        handleFormChange(
+                                                            "shortDescription",
+                                                            e.target.value,
+                                                        )}
                                                     placeholder="Brief description for product cards"
                                                 />
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="description">Full Description *</Label>
+                                                <Label htmlFor="description">
+                                                    Full Description *
+                                                </Label>
                                                 <Textarea
                                                     id="description"
                                                     value={formData.description}
-                                                    onChange={(e) => handleFormChange("description", e.target.value)}
+                                                    onChange={(e) =>
+                                                        handleFormChange(
+                                                            "description",
+                                                            e.target.value,
+                                                        )}
                                                     rows={4}
                                                     placeholder="Detailed product description including features, benefits, and specifications"
                                                     required
@@ -329,40 +374,62 @@ export default function VendorProductsPage() {
 
                                         {/* Pricing & Inventory */}
                                         <div className="space-y-4">
-                                            <h3 className="text-lg font-medium">Pricing & Inventory</h3>
-                                            
+                                            <h3 className="text-lg font-medium">
+                                                Pricing & Inventory
+                                            </h3>
+
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="price">Price ($) *</Label>
+                                                    <Label htmlFor="price">
+                                                        Price ($) *
+                                                    </Label>
                                                     <Input
                                                         id="price"
                                                         type="number"
                                                         step="0.01"
                                                         value={formData.price}
-                                                        onChange={(e) => handleFormChange("price", e.target.value)}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "price",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="299.99"
                                                         required
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="compareAtPrice">Compare At Price ($)</Label>
+                                                    <Label htmlFor="compareAtPrice">
+                                                        Compare At Price ($)
+                                                    </Label>
                                                     <Input
                                                         id="compareAtPrice"
                                                         type="number"
                                                         step="0.01"
-                                                        value={formData.compareAtPrice}
-                                                        onChange={(e) => handleFormChange("compareAtPrice", e.target.value)}
+                                                        value={formData
+                                                            .compareAtPrice}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "compareAtPrice",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="399.99"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="costPerItem">Cost Per Item ($)</Label>
+                                                    <Label htmlFor="costPerItem">
+                                                        Cost Per Item ($)
+                                                    </Label>
                                                     <Input
                                                         id="costPerItem"
                                                         type="number"
                                                         step="0.01"
-                                                        value={formData.costPerItem}
-                                                        onChange={(e) => handleFormChange("costPerItem", e.target.value)}
+                                                        value={formData
+                                                            .costPerItem}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "costPerItem",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="200.00"
                                                     />
                                                 </div>
@@ -370,32 +437,51 @@ export default function VendorProductsPage() {
 
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="stock">Stock Quantity *</Label>
+                                                    <Label htmlFor="stock">
+                                                        Stock Quantity *
+                                                    </Label>
                                                     <Input
                                                         id="stock"
                                                         type="number"
                                                         value={formData.stock}
-                                                        onChange={(e) => handleFormChange("stock", e.target.value)}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "stock",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="100"
                                                         required
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="lowStockThreshold">Low Stock Threshold</Label>
+                                                    <Label htmlFor="lowStockThreshold">
+                                                        Low Stock Threshold
+                                                    </Label>
                                                     <Input
                                                         id="lowStockThreshold"
                                                         type="number"
-                                                        value={formData.lowStockThreshold}
-                                                        onChange={(e) => handleFormChange("lowStockThreshold", e.target.value)}
+                                                        value={formData
+                                                            .lowStockThreshold}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "lowStockThreshold",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="10"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="sku">SKU</Label>
+                                                    <Label htmlFor="sku">
+                                                        SKU
+                                                    </Label>
                                                     <Input
                                                         id="sku"
                                                         value={formData.sku}
-                                                        onChange={(e) => handleFormChange("sku", e.target.value)}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "sku",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="SP-400W-MONO-001"
                                                     />
                                                 </div>
@@ -404,26 +490,40 @@ export default function VendorProductsPage() {
 
                                         {/* Solar Panel Specifications */}
                                         <div className="space-y-4">
-                                            <h3 className="text-lg font-medium">Solar Panel Specifications</h3>
-                                            
+                                            <h3 className="text-lg font-medium">
+                                                Solar Panel Specifications
+                                            </h3>
+
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="wattage">Wattage (W)</Label>
+                                                    <Label htmlFor="wattage">
+                                                        Wattage (W)
+                                                    </Label>
                                                     <Input
                                                         id="wattage"
                                                         type="number"
                                                         value={formData.wattage}
-                                                        onChange={(e) => handleFormChange("wattage", e.target.value)}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "wattage",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="400"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="voltage">Voltage (V)</Label>
+                                                    <Label htmlFor="voltage">
+                                                        Voltage (V)
+                                                    </Label>
                                                     <Input
                                                         id="voltage"
                                                         type="number"
                                                         value={formData.voltage}
-                                                        onChange={(e) => handleFormChange("voltage", e.target.value)}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "voltage",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="24"
                                                     />
                                                 </div>
@@ -431,22 +531,36 @@ export default function VendorProductsPage() {
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="panelType">Panel Type</Label>
+                                                    <Label htmlFor="panelType">
+                                                        Panel Type
+                                                    </Label>
                                                     <Input
                                                         id="panelType"
-                                                        value={formData.panelType}
-                                                        onChange={(e) => handleFormChange("panelType", e.target.value)}
+                                                        value={formData
+                                                            .panelType}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "panelType",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="Monocrystalline"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="efficiency">Efficiency (%)</Label>
+                                                    <Label htmlFor="efficiency">
+                                                        Efficiency (%)
+                                                    </Label>
                                                     <Input
                                                         id="efficiency"
                                                         type="number"
                                                         step="0.1"
-                                                        value={formData.efficiency}
-                                                        onChange={(e) => handleFormChange("efficiency", e.target.value)}
+                                                        value={formData
+                                                            .efficiency}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "efficiency",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="22.5"
                                                     />
                                                 </div>
@@ -454,34 +568,53 @@ export default function VendorProductsPage() {
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="warranty">Warranty (Years)</Label>
+                                                    <Label htmlFor="warranty">
+                                                        Warranty (Years)
+                                                    </Label>
                                                     <Input
                                                         id="warranty"
                                                         type="number"
-                                                        value={formData.warranty}
-                                                        onChange={(e) => handleFormChange("warranty", e.target.value)}
+                                                        value={formData
+                                                            .warranty}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "warranty",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="25"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="weight">Weight (kg)</Label>
+                                                    <Label htmlFor="weight">
+                                                        Weight (kg)
+                                                    </Label>
                                                     <Input
                                                         id="weight"
                                                         type="number"
                                                         step="0.1"
                                                         value={formData.weight}
-                                                        onChange={(e) => handleFormChange("weight", e.target.value)}
+                                                        onChange={(e) =>
+                                                            handleFormChange(
+                                                                "weight",
+                                                                e.target.value,
+                                                            )}
                                                         placeholder="22.5"
                                                     />
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="dimensions">Dimensions</Label>
+                                                <Label htmlFor="dimensions">
+                                                    Dimensions
+                                                </Label>
                                                 <Input
                                                     id="dimensions"
                                                     value={formData.dimensions}
-                                                    onChange={(e) => handleFormChange("dimensions", e.target.value)}
+                                                    onChange={(e) =>
+                                                        handleFormChange(
+                                                            "dimensions",
+                                                            e.target.value,
+                                                        )}
                                                     placeholder="e.g., 2000 x 1000 x 40 mm"
                                                 />
                                             </div>
@@ -499,29 +632,49 @@ export default function VendorProductsPage() {
 
                                         {/* Status */}
                                         <div className="space-y-2">
-                                            <Label htmlFor="status">Status</Label>
+                                            <Label htmlFor="status">
+                                                Status
+                                            </Label>
                                             <Select
                                                 value={formData.status}
-                                                onValueChange={(value) => handleFormChange("status", value)}
+                                                onValueChange={(value) =>
+                                                    handleFormChange(
+                                                        "status",
+                                                        value,
+                                                    )}
                                             >
                                                 <SelectTrigger id="status">
                                                     <SelectValue />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="DRAFT">Draft</SelectItem>
-                                                    <SelectItem value="PENDING">Pending Review</SelectItem>
-                                                    <SelectItem value="ACTIVE">Active</SelectItem>
-                                                    <SelectItem value="OUT_OF_STOCK">Out of Stock</SelectItem>
+                                                    <SelectItem value="DRAFT">
+                                                        Draft
+                                                    </SelectItem>
+                                                    <SelectItem value="PENDING">
+                                                        Pending Review
+                                                    </SelectItem>
+                                                    <SelectItem value="ACTIVE">
+                                                        Active
+                                                    </SelectItem>
+                                                    <SelectItem value="OUT_OF_STOCK">
+                                                        Out of Stock
+                                                    </SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </div>
                                     </div>
                                     <DialogFooter>
-                                        <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            onClick={() => setDialogOpen(false)}
+                                        >
                                             Cancel
                                         </Button>
                                         <Button type="submit">
-                                            {editingProduct ? "Update" : "Create"} Product
+                                            {editingProduct
+                                                ? "Update"
+                                                : "Create"} Product
                                         </Button>
                                     </DialogFooter>
                                 </form>
@@ -529,60 +682,79 @@ export default function VendorProductsPage() {
                         </Dialog>
                     </div>
 
-                    {products.length === 0 ? (
-                        <div className="text-center py-8 text-muted-foreground">
-                            <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                            <p>No products yet. Add your first product to get started.</p>
-                        </div>
-                    ) : (
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Name</TableHead>
-                                    <TableHead>SKU</TableHead>
-                                    <TableHead>Price</TableHead>
-                                    <TableHead>Stock</TableHead>
-                                    <TableHead>Status</TableHead>
-                                    <TableHead className="text-right">Actions</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {products.map((product) => (
-                                    <TableRow key={product.id}>
-                                        <TableCell className="font-medium">
-                                            {product.name}
-                                        </TableCell>
-                                        <TableCell>{product.sku}</TableCell>
-                                        <TableCell>${product.price.toFixed(2)}</TableCell>
-                                        <TableCell>{product.stock}</TableCell>
-                                        <TableCell>
-                                            <Badge variant={getStatusBadgeVariant(product.status)}>
-                                                {product.status}
-                                            </Badge>
-                                        </TableCell>
-                                        <TableCell className="text-right">
-                                            <div className="flex justify-end gap-2">
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    onClick={() => handleEdit(product)}
-                                                >
-                                                    <Edit className="h-4 w-4" />
-                                                </Button>
-                                                <Button
-                                                    variant="destructive"
-                                                    size="sm"
-                                                    onClick={() => handleDelete(product.id)}
-                                                >
-                                                    <Trash2 className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </TableCell>
+                    {products.length === 0
+                        ? (
+                            <div className="text-center py-8 text-muted-foreground">
+                                <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                                <p>
+                                    No products yet. Add your first product to
+                                    get started.
+                                </p>
+                            </div>
+                        )
+                        : (
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Name</TableHead>
+                                        <TableHead>SKU</TableHead>
+                                        <TableHead>Price</TableHead>
+                                        <TableHead>Stock</TableHead>
+                                        <TableHead>Status</TableHead>
+                                        <TableHead className="text-right">
+                                            Actions
+                                        </TableHead>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    )}
+                                </TableHeader>
+                                <TableBody>
+                                    {products.map((product) => (
+                                        <TableRow key={product.id}>
+                                            <TableCell className="font-medium">
+                                                {product.name}
+                                            </TableCell>
+                                            <TableCell>{product.sku}</TableCell>
+                                            <TableCell>
+                                                ${product.price.toFixed(2)}
+                                            </TableCell>
+                                            <TableCell>
+                                                {product.stock}
+                                            </TableCell>
+                                            <TableCell>
+                                                <Badge
+                                                    variant={getStatusBadgeVariant(
+                                                        product.status,
+                                                    )}
+                                                >
+                                                    {product.status}
+                                                </Badge>
+                                            </TableCell>
+                                            <TableCell className="text-right">
+                                                <div className="flex justify-end gap-2">
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            handleEdit(product)}
+                                                    >
+                                                        <Edit className="h-4 w-4" />
+                                                    </Button>
+                                                    <Button
+                                                        variant="destructive"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                product.id,
+                                                            )}
+                                                    >
+                                                        <Trash2 className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        )}
                 </div>
             </SidebarInset>
         </SidebarProvider>

@@ -40,7 +40,9 @@ export default function LoginPage() {
         setError("");
 
         try {
-            const formData = new FormData(event.currentTarget);
+            const formData = new FormData(
+                event.currentTarget as HTMLFormElement,
+            );
             const email = formData.get("email") as string;
             const password = formData.get("password") as string;
 

@@ -141,7 +141,7 @@ const adminProjects = [
   },
 ];
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = useSession();
 
   // Create user data from session

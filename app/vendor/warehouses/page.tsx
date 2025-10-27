@@ -27,7 +27,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Plus, Edit, Trash2, MapPin } from "lucide-react";
+import { Edit, MapPin, Plus, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface Warehouse {
@@ -49,7 +49,9 @@ export default function VendorWarehousesPage() {
     const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
     const [loading, setLoading] = useState(true);
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [editingWarehouse, setEditingWarehouse] = useState<Warehouse | null>(null);
+    const [editingWarehouse, setEditingWarehouse] = useState<Warehouse | null>(
+        null,
+    );
 
     const [formData, setFormData] = useState({
         name: "",
@@ -158,7 +160,11 @@ export default function VendorWarehousesPage() {
     };
 
     if (status === "loading" || loading) {
-        return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                Loading...
+            </div>
+        );
     }
 
     if (!session) {
@@ -178,10 +184,13 @@ export default function VendorWarehousesPage() {
                                 Manage your warehouse locations
                             </p>
                         </div>
-                        <Dialog open={dialogOpen} onOpenChange={(open) => {
-                            setDialogOpen(open);
-                            if (!open) resetForm();
-                        }}>
+                        <Dialog
+                            open={dialogOpen}
+                            onOpenChange={(open) => {
+                                setDialogOpen(open);
+                                if (!open) resetForm();
+                            }}
+                        >
                             <DialogTrigger asChild>
                                 <Button onClick={() => setDialogOpen(true)}>
                                     <Plus className="mr-2 h-4 w-4" />
@@ -191,7 +200,9 @@ export default function VendorWarehousesPage() {
                             <DialogContent className="sm:max-w-[500px]">
                                 <DialogHeader>
                                     <DialogTitle>
-                                        {editingWarehouse ? "Edit Warehouse" : "Add New Warehouse"}
+                                        {editingWarehouse
+                                            ? "Edit Warehouse"
+                                            : "Add New Warehouse"}
                                     </DialogTitle>
                                     <DialogDescription>
                                         Enter the warehouse details below
@@ -204,55 +215,93 @@ export default function VendorWarehousesPage() {
                                             <Input
                                                 id="name"
                                                 value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        name: e.target.value,
+                                                    })}
                                                 required
                                             />
                                         </div>
                                         <div className="grid gap-2">
-                                            <Label htmlFor="address">Address</Label>
+                                            <Label htmlFor="address">
+                                                Address
+                                            </Label>
                                             <Input
                                                 id="address"
                                                 value={formData.address}
-                                                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        address: e.target.value,
+                                                    })}
                                                 required
                                             />
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="grid gap-2">
-                                                <Label htmlFor="city">City</Label>
+                                                <Label htmlFor="city">
+                                                    City
+                                                </Label>
                                                 <Input
                                                     id="city"
                                                     value={formData.city}
-                                                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                                                    onChange={(e) =>
+                                                        setFormData({
+                                                            ...formData,
+                                                            city:
+                                                                e.target.value,
+                                                        })}
                                                     required
                                                 />
                                             </div>
                                             <div className="grid gap-2">
-                                                <Label htmlFor="state">State</Label>
+                                                <Label htmlFor="state">
+                                                    State
+                                                </Label>
                                                 <Input
                                                     id="state"
                                                     value={formData.state}
-                                                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                                                    onChange={(e) =>
+                                                        setFormData({
+                                                            ...formData,
+                                                            state:
+                                                                e.target.value,
+                                                        })}
                                                     required
                                                 />
                                             </div>
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="grid gap-2">
-                                                <Label htmlFor="postalCode">Postal Code</Label>
+                                                <Label htmlFor="postalCode">
+                                                    Postal Code
+                                                </Label>
                                                 <Input
                                                     id="postalCode"
                                                     value={formData.postalCode}
-                                                    onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                                                    onChange={(e) =>
+                                                        setFormData({
+                                                            ...formData,
+                                                            postalCode:
+                                                                e.target.value,
+                                                        })}
                                                     required
                                                 />
                                             </div>
                                             <div className="grid gap-2">
-                                                <Label htmlFor="country">Country</Label>
+                                                <Label htmlFor="country">
+                                                    Country
+                                                </Label>
                                                 <Input
                                                     id="country"
                                                     value={formData.country}
-                                                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                                                    onChange={(e) =>
+                                                        setFormData({
+                                                            ...formData,
+                                                            country:
+                                                                e.target.value,
+                                                        })}
                                                 />
                                             </div>
                                         </div>
@@ -261,18 +310,31 @@ export default function VendorWarehousesPage() {
                                                 type="checkbox"
                                                 id="isActive"
                                                 checked={formData.isActive}
-                                                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                                                onChange={(e) =>
+                                                    setFormData({
+                                                        ...formData,
+                                                        isActive:
+                                                            e.target.checked,
+                                                    })}
                                                 className="h-4 w-4"
                                             />
-                                            <Label htmlFor="isActive">Active</Label>
+                                            <Label htmlFor="isActive">
+                                                Active
+                                            </Label>
                                         </div>
                                     </div>
                                     <DialogFooter>
-                                        <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            onClick={() => setDialogOpen(false)}
+                                        >
                                             Cancel
                                         </Button>
                                         <Button type="submit">
-                                            {editingWarehouse ? "Update" : "Create"} Warehouse
+                                            {editingWarehouse
+                                                ? "Update"
+                                                : "Create"} Warehouse
                                         </Button>
                                     </DialogFooter>
                                 </form>
@@ -280,58 +342,79 @@ export default function VendorWarehousesPage() {
                         </Dialog>
                     </div>
 
-                    {warehouses.length === 0 ? (
-                        <div className="text-center py-8 text-muted-foreground">
-                            <MapPin className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                            <p>No warehouses yet. Add your first warehouse to get started.</p>
-                        </div>
-                    ) : (
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Name</TableHead>
-                                    <TableHead>Location</TableHead>
-                                    <TableHead>Status</TableHead>
-                                    <TableHead className="text-right">Actions</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {warehouses.map((warehouse) => (
-                                    <TableRow key={warehouse.id}>
-                                        <TableCell className="font-medium">
-                                            {warehouse.name}
-                                        </TableCell>
-                                        <TableCell>
-                                            {warehouse.city}, {warehouse.state} {warehouse.postalCode}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Badge variant={warehouse.isActive ? "default" : "secondary"}>
-                                                {warehouse.isActive ? "Active" : "Inactive"}
-                                            </Badge>
-                                        </TableCell>
-                                        <TableCell className="text-right">
-                                            <div className="flex justify-end gap-2">
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    onClick={() => handleEdit(warehouse)}
-                                                >
-                                                    <Edit className="h-4 w-4" />
-                                                </Button>
-                                                <Button
-                                                    variant="destructive"
-                                                    size="sm"
-                                                    onClick={() => handleDelete(warehouse.id)}
-                                                >
-                                                    <Trash2 className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </TableCell>
+                    {warehouses.length === 0
+                        ? (
+                            <div className="text-center py-8 text-muted-foreground">
+                                <MapPin className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                                <p>
+                                    No warehouses yet. Add your first warehouse
+                                    to get started.
+                                </p>
+                            </div>
+                        )
+                        : (
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Name</TableHead>
+                                        <TableHead>Location</TableHead>
+                                        <TableHead>Status</TableHead>
+                                        <TableHead className="text-right">
+                                            Actions
+                                        </TableHead>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    )}
+                                </TableHeader>
+                                <TableBody>
+                                    {warehouses.map((warehouse) => (
+                                        <TableRow key={warehouse.id}>
+                                            <TableCell className="font-medium">
+                                                {warehouse.name}
+                                            </TableCell>
+                                            <TableCell>
+                                                {warehouse.city},{" "}
+                                                {warehouse.state}{" "}
+                                                {warehouse.postalCode}
+                                            </TableCell>
+                                            <TableCell>
+                                                <Badge
+                                                    variant={warehouse.isActive
+                                                        ? "default"
+                                                        : "secondary"}
+                                                >
+                                                    {warehouse.isActive
+                                                        ? "Active"
+                                                        : "Inactive"}
+                                                </Badge>
+                                            </TableCell>
+                                            <TableCell className="text-right">
+                                                <div className="flex justify-end gap-2">
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            handleEdit(
+                                                                warehouse,
+                                                            )}
+                                                    >
+                                                        <Edit className="h-4 w-4" />
+                                                    </Button>
+                                                    <Button
+                                                        variant="destructive"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                warehouse.id,
+                                                            )}
+                                                    >
+                                                        <Trash2 className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        )}
                 </div>
             </SidebarInset>
         </SidebarProvider>
