@@ -70,3 +70,4 @@ function GridPattern({
 }
 
 export { GridPattern };
+

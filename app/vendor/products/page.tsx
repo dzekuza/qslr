@@ -26,16 +26,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { Edit, Package, Plus, Trash2 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Package, Plus } from "lucide-react";
+import { VendorProductCard } from "@/components/products/VendorProductCard";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/ui/image-upload";
 
@@ -248,19 +240,6 @@ export default function VendorProductsPage() {
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
-    const getStatusBadgeVariant = (status: string) => {
-        switch (status) {
-            case "ACTIVE":
-                return "default";
-            case "DRAFT":
-                return "secondary";
-            case "OUT_OF_STOCK":
-                return "destructive";
-            default:
-                return "outline";
-        }
-    };
-
     if (status === "loading" || loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -312,7 +291,7 @@ export default function VendorProductsPage() {
                                     </DialogDescription>
                                 </DialogHeader>
                                 <form onSubmit={handleSubmit}>
-                                    <div className="grid gap-4">
+                                    <div className="grid gap-4 mb-4">
                                         {/* Basic Information */}
                                         <div className="space-y-4">
                                             <h3 className="text-lg font-medium">
@@ -370,6 +349,10 @@ export default function VendorProductsPage() {
                                                     required
                                                 />
                                             </div>
+                                        </div>
+
+                                        {/* Divider */}
+                                        <div className="border-t border-gray-200">
                                         </div>
 
                                         {/* Pricing & Inventory */}
@@ -486,6 +469,10 @@ export default function VendorProductsPage() {
                                                     />
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        {/* Divider */}
+                                        <div className="border-t border-gray-200">
                                         </div>
 
                                         {/* Solar Panel Specifications */}
@@ -620,6 +607,10 @@ export default function VendorProductsPage() {
                                             </div>
                                         </div>
 
+                                        {/* Divider */}
+                                        <div className="border-t border-gray-200">
+                                        </div>
+
                                         {/* Product Images */}
                                         <div className="space-y-2">
                                             <Label>Product Images</Label>
@@ -628,6 +619,10 @@ export default function VendorProductsPage() {
                                                 onImagesChange={setProductImages}
                                                 maxImages={10}
                                             />
+                                        </div>
+
+                                        {/* Divider */}
+                                        <div className="border-t border-gray-200">
                                         </div>
 
                                         {/* Status */}
@@ -693,67 +688,16 @@ export default function VendorProductsPage() {
                             </div>
                         )
                         : (
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>Name</TableHead>
-                                        <TableHead>SKU</TableHead>
-                                        <TableHead>Price</TableHead>
-                                        <TableHead>Stock</TableHead>
-                                        <TableHead>Status</TableHead>
-                                        <TableHead className="text-right">
-                                            Actions
-                                        </TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {products.map((product) => (
-                                        <TableRow key={product.id}>
-                                            <TableCell className="font-medium">
-                                                {product.name}
-                                            </TableCell>
-                                            <TableCell>{product.sku}</TableCell>
-                                            <TableCell>
-                                                ${product.price.toFixed(2)}
-                                            </TableCell>
-                                            <TableCell>
-                                                {product.stock}
-                                            </TableCell>
-                                            <TableCell>
-                                                <Badge
-                                                    variant={getStatusBadgeVariant(
-                                                        product.status,
-                                                    )}
-                                                >
-                                                    {product.status}
-                                                </Badge>
-                                            </TableCell>
-                                            <TableCell className="text-right">
-                                                <div className="flex justify-end gap-2">
-                                                    <Button
-                                                        variant="outline"
-                                                        size="sm"
-                                                        onClick={() =>
-                                                            handleEdit(product)}
-                                                    >
-                                                        <Edit className="h-4 w-4" />
-                                                    </Button>
-                                                    <Button
-                                                        variant="destructive"
-                                                        size="sm"
-                                                        onClick={() =>
-                                                            handleDelete(
-                                                                product.id,
-                                                            )}
-                                                    >
-                                                        <Trash2 className="h-4 w-4" />
-                                                    </Button>
-                                                </div>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {products.map((product) => (
+                                    <VendorProductCard
+                                        key={product.id}
+                                        product={product}
+                                        onEdit={handleEdit}
+                                        onDelete={handleDelete}
+                                    />
+                                ))}
+                            </div>
                         )}
                 </div>
             </SidebarInset>

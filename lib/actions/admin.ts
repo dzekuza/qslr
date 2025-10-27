@@ -203,3 +203,4 @@ export async function createProduct(formData: FormData) {
     throw new Error('Failed to create product')
   }
 }
+

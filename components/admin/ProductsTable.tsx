@@ -40,7 +40,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/ui/image-upload";
-import { updateProductStatus, createProduct } from "@/lib/actions/admin";
+import { createProduct, updateProductStatus } from "@/lib/actions/admin";
 
 interface Product {
     id: string;
@@ -106,7 +106,7 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isUpdating, setIsUpdating] = useState<string | null>(null);
-    
+
     // Form state
     const [formData, setFormData] = useState({
         name: "",
@@ -126,9 +126,9 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
         warranty: "",
         dimensions: "",
         weight: "",
-        lowStockThreshold: "10"
+        lowStockThreshold: "10",
     });
-    
+
     // Image state
     const [productImages, setProductImages] = useState<string[]>([]);
 
@@ -190,12 +190,12 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
             Object.entries(formData).forEach(([key, value]) => {
                 formDataObj.append(key, value);
             });
-            formDataObj.append('images', JSON.stringify(productImages));
-            formDataObj.append('thumbnail', productImages[0] || '');
-            formDataObj.append('certification', JSON.stringify([]));
+            formDataObj.append("images", JSON.stringify(productImages));
+            formDataObj.append("thumbnail", productImages[0] || "");
+            formDataObj.append("certification", JSON.stringify([]));
 
             await createProduct(formDataObj);
-            
+
             // Reset form
             setFormData({
                 name: "",
@@ -215,7 +215,7 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                 warranty: "",
                 dimensions: "",
                 weight: "",
-                lowStockThreshold: "10"
+                lowStockThreshold: "10",
             });
             setProductImages([]);
             setIsAddDialogOpen(false);
@@ -227,21 +227,24 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
     };
 
     const handleFormChange = (field: string, value: string) => {
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            [field]: value
+            [field]: value,
         }));
     };
 
     const filteredProducts = products.filter((product) => {
-        const matchesSearch = 
+        const matchesSearch =
             product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             product.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            product.vendor.businessName.toLowerCase().includes(searchQuery.toLowerCase());
+            product.description.toLowerCase().includes(
+                searchQuery.toLowerCase(),
+            ) ||
+            product.vendor.businessName.toLowerCase().includes(
+                searchQuery.toLowerCase(),
+            );
 
-        const matchesStatus = 
-            statusFilter === "ALL" ||
+        const matchesStatus = statusFilter === "ALL" ||
             product.status === statusFilter;
 
         return matchesSearch && matchesStatus;
@@ -259,7 +262,10 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                         Manage and approve products from all vendors
                     </p>
                 </div>
-                <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+                <Dialog
+                    open={isAddDialogOpen}
+                    onOpenChange={setIsAddDialogOpen}
+                >
                     <DialogTrigger asChild>
                         <Button>
                             <Plus className="h-4 w-4 mr-2" />
@@ -280,7 +286,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                     <Input
                                         id="name"
                                         value={formData.name}
-                                        onChange={(e) => handleFormChange("name", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "name",
+                                                e.target.value,
+                                            )}
                                         placeholder="Enter product name"
                                         required
                                     />
@@ -290,29 +300,45 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                     <Input
                                         id="sku"
                                         value={formData.sku}
-                                        onChange={(e) => handleFormChange("sku", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "sku",
+                                                e.target.value,
+                                            )}
                                         placeholder="Auto-generated if empty"
                                     />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="description">Description *</Label>
+                                <Label htmlFor="description">
+                                    Description *
+                                </Label>
                                 <Textarea
                                     id="description"
                                     value={formData.description}
-                                    onChange={(e) => handleFormChange("description", e.target.value)}
+                                    onChange={(e) =>
+                                        handleFormChange(
+                                            "description",
+                                            e.target.value,
+                                        )}
                                     placeholder="Enter product description"
                                     required
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="shortDescription">Short Description</Label>
+                                <Label htmlFor="shortDescription">
+                                    Short Description
+                                </Label>
                                 <Input
                                     id="shortDescription"
                                     value={formData.shortDescription}
-                                    onChange={(e) => handleFormChange("shortDescription", e.target.value)}
+                                    onChange={(e) =>
+                                        handleFormChange(
+                                            "shortDescription",
+                                            e.target.value,
+                                        )}
                                     placeholder="Brief product summary"
                                 />
                             </div>
@@ -325,30 +351,46 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                         type="number"
                                         step="0.01"
                                         value={formData.price}
-                                        onChange={(e) => handleFormChange("price", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "price",
+                                                e.target.value,
+                                            )}
                                         placeholder="0.00"
                                         required
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="compareAtPrice">Compare At Price</Label>
+                                    <Label htmlFor="compareAtPrice">
+                                        Compare At Price
+                                    </Label>
                                     <Input
                                         id="compareAtPrice"
                                         type="number"
                                         step="0.01"
                                         value={formData.compareAtPrice}
-                                        onChange={(e) => handleFormChange("compareAtPrice", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "compareAtPrice",
+                                                e.target.value,
+                                            )}
                                         placeholder="0.00"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="costPerItem">Cost Per Item</Label>
+                                    <Label htmlFor="costPerItem">
+                                        Cost Per Item
+                                    </Label>
                                     <Input
                                         id="costPerItem"
                                         type="number"
                                         step="0.01"
                                         value={formData.costPerItem}
-                                        onChange={(e) => handleFormChange("costPerItem", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "costPerItem",
+                                                e.target.value,
+                                            )}
                                         placeholder="0.00"
                                     />
                                 </div>
@@ -361,32 +403,56 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                         id="stock"
                                         type="number"
                                         value={formData.stock}
-                                        onChange={(e) => handleFormChange("stock", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "stock",
+                                                e.target.value,
+                                            )}
                                         placeholder="0"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="lowStockThreshold">Low Stock Threshold</Label>
+                                    <Label htmlFor="lowStockThreshold">
+                                        Low Stock Threshold
+                                    </Label>
                                     <Input
                                         id="lowStockThreshold"
                                         type="number"
                                         value={formData.lowStockThreshold}
-                                        onChange={(e) => handleFormChange("lowStockThreshold", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "lowStockThreshold",
+                                                e.target.value,
+                                            )}
                                         placeholder="10"
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="status">Status</Label>
-                                    <Select value={formData.status} onValueChange={(value) => handleFormChange("status", value)}>
+                                    <Select
+                                        value={formData.status}
+                                        onValueChange={(value) =>
+                                            handleFormChange("status", value)}
+                                    >
                                         <SelectTrigger>
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="DRAFT">Draft</SelectItem>
-                                            <SelectItem value="PENDING">Pending</SelectItem>
-                                            <SelectItem value="ACTIVE">Active</SelectItem>
-                                            <SelectItem value="REJECTED">Rejected</SelectItem>
-                                            <SelectItem value="OUT_OF_STOCK">Out of Stock</SelectItem>
+                                            <SelectItem value="DRAFT">
+                                                Draft
+                                            </SelectItem>
+                                            <SelectItem value="PENDING">
+                                                Pending
+                                            </SelectItem>
+                                            <SelectItem value="ACTIVE">
+                                                Active
+                                            </SelectItem>
+                                            <SelectItem value="REJECTED">
+                                                Rejected
+                                            </SelectItem>
+                                            <SelectItem value="OUT_OF_STOCK">
+                                                Out of Stock
+                                            </SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
@@ -394,14 +460,23 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
 
                             <div className="space-y-2">
                                 <Label htmlFor="vendorId">Vendor *</Label>
-                                <Select value={formData.vendorId} onValueChange={(value) => handleFormChange("vendorId", value)}>
+                                <Select
+                                    value={formData.vendorId}
+                                    onValueChange={(value) =>
+                                        handleFormChange("vendorId", value)}
+                                >
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select a vendor" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         {vendors.map((vendor) => (
-                                            <SelectItem key={vendor.id} value={vendor.id}>
-                                                {vendor.businessName} ({vendor.user?.name || vendor.user.email})
+                                            <SelectItem
+                                                key={vendor.id}
+                                                value={vendor.id}
+                                            >
+                                                {vendor.businessName}{" "}
+                                                ({vendor.user?.name ||
+                                                    vendor.user.email})
                                             </SelectItem>
                                         ))}
                                     </SelectContent>
@@ -415,7 +490,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                         id="wattage"
                                         type="number"
                                         value={formData.wattage}
-                                        onChange={(e) => handleFormChange("wattage", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "wattage",
+                                                e.target.value,
+                                            )}
                                         placeholder="e.g., 400"
                                     />
                                 </div>
@@ -425,7 +504,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                         id="voltage"
                                         type="number"
                                         value={formData.voltage}
-                                        onChange={(e) => handleFormChange("voltage", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "voltage",
+                                                e.target.value,
+                                            )}
                                         placeholder="e.g., 24"
                                     />
                                 </div>
@@ -433,22 +516,34 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="panelType">Panel Type</Label>
+                                    <Label htmlFor="panelType">
+                                        Panel Type
+                                    </Label>
                                     <Input
                                         id="panelType"
                                         value={formData.panelType}
-                                        onChange={(e) => handleFormChange("panelType", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "panelType",
+                                                e.target.value,
+                                            )}
                                         placeholder="e.g., Monocrystalline"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="efficiency">Efficiency (%)</Label>
+                                    <Label htmlFor="efficiency">
+                                        Efficiency (%)
+                                    </Label>
                                     <Input
                                         id="efficiency"
                                         type="number"
                                         step="0.01"
                                         value={formData.efficiency}
-                                        onChange={(e) => handleFormChange("efficiency", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "efficiency",
+                                                e.target.value,
+                                            )}
                                         placeholder="e.g., 22.5"
                                     />
                                 </div>
@@ -456,12 +551,18 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="warranty">Warranty (years)</Label>
+                                    <Label htmlFor="warranty">
+                                        Warranty (years)
+                                    </Label>
                                     <Input
                                         id="warranty"
                                         type="number"
                                         value={formData.warranty}
-                                        onChange={(e) => handleFormChange("warranty", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "warranty",
+                                                e.target.value,
+                                            )}
                                         placeholder="e.g., 25"
                                     />
                                 </div>
@@ -472,7 +573,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                         type="number"
                                         step="0.1"
                                         value={formData.weight}
-                                        onChange={(e) => handleFormChange("weight", e.target.value)}
+                                        onChange={(e) =>
+                                            handleFormChange(
+                                                "weight",
+                                                e.target.value,
+                                            )}
                                         placeholder="e.g., 22.5"
                                     />
                                 </div>
@@ -483,7 +588,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                 <Input
                                     id="dimensions"
                                     value={formData.dimensions}
-                                    onChange={(e) => handleFormChange("dimensions", e.target.value)}
+                                    onChange={(e) =>
+                                        handleFormChange(
+                                            "dimensions",
+                                            e.target.value,
+                                        )}
                                     placeholder="e.g., 2000 x 1000 x 40 mm"
                                 />
                             </div>
@@ -498,11 +607,17 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                             </div>
 
                             <DialogFooter>
-                                <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    onClick={() => setIsAddDialogOpen(false)}
+                                >
                                     Cancel
                                 </Button>
                                 <Button type="submit" disabled={isSubmitting}>
-                                    {isSubmitting ? "Creating..." : "Create Product"}
+                                    {isSubmitting
+                                        ? "Creating..."
+                                        : "Create Product"}
                                 </Button>
                             </DialogFooter>
                         </form>
@@ -517,8 +632,7 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                     <Input
                         placeholder="Search products by name, SKU, description, or vendor..."
                         value={searchQuery}
-                        onChange={(e) =>
-                            setSearchQuery(e.target.value)}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         className="pl-8"
                     />
                 </div>
@@ -532,7 +646,9 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                         <SelectItem value="PENDING">Pending</SelectItem>
                         <SelectItem value="ACTIVE">Active</SelectItem>
                         <SelectItem value="REJECTED">Rejected</SelectItem>
-                        <SelectItem value="OUT_OF_STOCK">Out of Stock</SelectItem>
+                        <SelectItem value="OUT_OF_STOCK">
+                            Out of Stock
+                        </SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -593,16 +709,19 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                                 </div>
                                                 {product.shortDescription && (
                                                     <div className="text-xs text-muted-foreground mt-1">
-                                                        {product.shortDescription}
+                                                        {product
+                                                            .shortDescription}
                                                     </div>
                                                 )}
                                             </td>
                                             <td className="p-4 align-middle">
                                                 <div className="font-medium">
-                                                    {product.vendor.businessName}
+                                                    {product.vendor
+                                                        .businessName}
                                                 </div>
                                                 <div className="text-sm text-muted-foreground">
-                                                    {product.vendor.user?.name || "N/A"}
+                                                    {product.vendor.user
+                                                        ?.name || "N/A"}
                                                 </div>
                                             </td>
                                             <td className="p-4 align-middle">
@@ -612,7 +731,9 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                                 {product.compareAtPrice && (
                                                     <div className="text-sm text-muted-foreground">
                                                         <span className="line-through">
-                                                            ${product.compareAtPrice.toFixed(2)}
+                                                            ${product
+                                                                .compareAtPrice
+                                                                .toFixed(2)}
                                                         </span>
                                                     </div>
                                                 )}
@@ -621,11 +742,14 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                                 <div className="font-medium">
                                                     {product.stock}
                                                 </div>
-                                                {product.stock <= product.lowStockThreshold && (
-                                                    <div className="text-xs text-orange-600">
-                                                        Low stock
-                                                    </div>
-                                                )}
+                                                {product.stock <=
+                                                        product
+                                                            .lowStockThreshold &&
+                                                    (
+                                                        <div className="text-xs text-orange-600">
+                                                            Low stock
+                                                        </div>
+                                                    )}
                                             </td>
                                             <td className="p-4 align-middle">
                                                 {getStatusBadge(product.status)}
@@ -643,7 +767,8 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                                         <Button
                                                             variant="ghost"
                                                             className="h-8 w-8 p-0"
-                                                            disabled={isUpdating === product.id}
+                                                            disabled={isUpdating ===
+                                                                product.id}
                                                         >
                                                             <span className="sr-only">
                                                                 Open menu
@@ -658,7 +783,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                                                     product.id,
                                                                     "ACTIVE",
                                                                 )}
-                                                            disabled={product.status === "ACTIVE" || isUpdating === product.id}
+                                                            disabled={product
+                                                                        .status ===
+                                                                    "ACTIVE" ||
+                                                                isUpdating ===
+                                                                    product.id}
                                                         >
                                                             <CheckCircle2 className="mr-2 h-4 w-4" />
                                                             Approve
@@ -669,7 +798,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                                                     product.id,
                                                                     "REJECTED",
                                                                 )}
-                                                            disabled={product.status === "REJECTED" || isUpdating === product.id}
+                                                            disabled={product
+                                                                        .status ===
+                                                                    "REJECTED" ||
+                                                                isUpdating ===
+                                                                    product.id}
                                                         >
                                                             <XCircle className="mr-2 h-4 w-4" />
                                                             Reject
@@ -680,7 +813,11 @@ export function ProductsTable({ products, vendors }: ProductsTableProps) {
                                                                     product.id,
                                                                     "OUT_OF_STOCK",
                                                                 )}
-                                                            disabled={product.status === "OUT_OF_STOCK" || isUpdating === product.id}
+                                                            disabled={product
+                                                                        .status ===
+                                                                    "OUT_OF_STOCK" ||
+                                                                isUpdating ===
+                                                                    product.id}
                                                         >
                                                             <Ban className="mr-2 h-4 w-4" />
                                                             Mark Out of Stock

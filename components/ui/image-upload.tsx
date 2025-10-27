@@ -4,7 +4,6 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, X, Image as ImageIcon, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 
 interface ImageUploadProps {
     images: string[];
@@ -74,49 +73,45 @@ export function ImageUpload({
     return (
         <div className={`space-y-4 ${className}`}>
             {/* Upload Area */}
-            <Card>
-                <CardContent className="p-6">
-                    <div
-                        {...getRootProps()}
-                        className={`
-                            border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors
-                            ${isDragActive 
-                                ? 'border-primary bg-primary/5' 
-                                : 'border-muted-foreground/25 hover:border-primary/50'
+            <div
+                {...getRootProps()}
+                className={`
+                    border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors
+                    ${isDragActive 
+                        ? 'border-primary bg-primary/5' 
+                        : 'border-muted-foreground/25 hover:border-primary/50'
+                    }
+                    ${uploading || images.length >= maxImages 
+                        ? 'opacity-50 cursor-not-allowed' 
+                        : ''
+                    }
+                `}
+            >
+                <input {...getInputProps()} />
+                <div className="flex flex-col items-center gap-4">
+                    {uploading ? (
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    ) : (
+                        <Upload className="h-8 w-8 text-muted-foreground" />
+                    )}
+                    <div>
+                        <p className="text-sm font-medium">
+                            {isDragActive 
+                                ? 'Drop images here...' 
+                                : uploading 
+                                    ? 'Uploading...' 
+                                    : 'Drag & drop images here, or click to select'
                             }
-                            ${uploading || images.length >= maxImages 
-                                ? 'opacity-50 cursor-not-allowed' 
-                                : ''
-                            }
-                        `}
-                    >
-                        <input {...getInputProps()} />
-                        <div className="flex flex-col items-center gap-4">
-                            {uploading ? (
-                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                            ) : (
-                                <Upload className="h-8 w-8 text-muted-foreground" />
-                            )}
-                            <div>
-                                <p className="text-sm font-medium">
-                                    {isDragActive 
-                                        ? 'Drop images here...' 
-                                        : uploading 
-                                            ? 'Uploading...' 
-                                            : 'Drag & drop images here, or click to select'
-                                    }
-                                </p>
-                                <p className="text-xs text-muted-foreground mt-1">
-                                    PNG, JPG, GIF, WebP up to 10MB each
-                                </p>
-                                <p className="text-xs text-muted-foreground">
-                                    {images.length}/{maxImages} images
-                                </p>
-                            </div>
-                        </div>
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                            PNG, JPG, GIF, WebP up to 10MB each
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                            {images.length}/{maxImages} images
+                        </p>
                     </div>
-                </CardContent>
-            </Card>
+                </div>
+            </div>
 
             {/* Image Gallery */}
             {images.length > 0 && (
@@ -174,3 +169,4 @@ export function ImageUpload({
         </div>
     );
 }
+

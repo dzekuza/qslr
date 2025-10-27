@@ -45,3 +45,4 @@ function getRandomPattern(length?: number): [x: number, y: number][] {
 		Math.floor(Math.random() * 6) + 1, // random y between 1 and 6
 	]);
 }
+
