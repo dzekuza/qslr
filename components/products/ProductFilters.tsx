@@ -1,107 +1,106 @@
 "use client";
 
-import { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import styles from "./ProductCatalog.module.css";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-interface Category {
-  name: string;
-  count: number;
-}
-
-interface ProductFiltersProps {
-  categories: Category[];
-  availabilityOptions: string[];
-  quickFilters: string[];
-}
-
-export function ProductFilters({ 
-  categories, 
-  availabilityOptions, 
-  quickFilters 
-}: ProductFiltersProps) {
-  const [selectedAvailability, setSelectedAvailability] = useState<string>("");
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedQuickFilters, setSelectedQuickFilters] = useState<string[]>([]);
-
-  const handleCategoryChange = (categoryName: string, checked: boolean) => {
-    if (checked) {
-      setSelectedCategories([...selectedCategories, categoryName]);
-    } else {
-      setSelectedCategories(selectedCategories.filter(name => name !== categoryName));
-    }
-  };
-
-  const handleQuickFilterChange = (filterName: string, checked: boolean) => {
-    if (checked) {
-      setSelectedQuickFilters([...selectedQuickFilters, filterName]);
-    } else {
-      setSelectedQuickFilters(selectedQuickFilters.filter(name => name !== filterName));
-    }
-  };
-
+export function ProductFilters() {
   return (
-    <div className={styles.filterSidebar}>
-      <h2 className="text-lg font-semibold text-black">Filters</h2>
-      
-      {/* Quick Filter Buttons */}
-      <div className={styles.filterSection}>
-        <div className={styles.quickFilterButtons}>
-          {quickFilters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => handleQuickFilterChange(filter, !selectedQuickFilters.includes(filter))}
-              className={`${styles.quickFilterButton} ${
-                selectedQuickFilters.includes(filter) ? styles.active : ""
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-      </div>
+    <div className="bg-neutral-50 rounded-[10px] p-4 flex flex-col gap-2">
+      <h2 className="text-2xl font-semibold text-black">Filters</h2>
 
-      {/* Availability Filter */}
-      <div className={styles.filterSection}>
-        <h3 className={styles.filterTitle}>Availability from:</h3>
-        <RadioGroup 
-          value={selectedAvailability} 
-          onValueChange={setSelectedAvailability}
-          className={styles.radioGroup}
-        >
-          {availabilityOptions.map((option) => (
-            <div key={option} className={styles.radioItem}>
-              <RadioGroupItem value={option} id={option} />
-              <Label htmlFor={option} className={styles.radioLabel}>
-                {option}
-              </Label>
+      <Accordion type="multiple" className="w-full">
+        <AccordionItem value="availability" className="border-0">
+          <div className="h-px bg-gray-200 w-full"></div>
+          <AccordionTrigger className="py-2 hover:no-underline">
+            <p className="text-base font-medium text-black">Availability</p>
+          </AccordionTrigger>
+          <AccordionContent className="pb-2">
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">In stock</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">Out of stock</span>
+              </label>
             </div>
-          ))}
-        </RadioGroup>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Categories Filter */}
-      <div className={styles.filterSection}>
-        <h3 className={styles.filterTitle}>Categories:</h3>
-        <div className={styles.checkboxGroup}>
-          {categories.map((category) => (
-            <div key={category.name} className={styles.checkboxItem}>
-              <Checkbox
-                id={category.name}
-                checked={selectedCategories.includes(category.name)}
-                onCheckedChange={(checked) => 
-                  handleCategoryChange(category.name, checked as boolean)
-                }
-              />
-              <Label htmlFor={category.name} className={styles.checkboxLabel}>
-                {category.name} ({category.count})
-              </Label>
+        <AccordionItem value="price" className="border-0">
+          <div className="h-px bg-gray-200 w-full"></div>
+          <AccordionTrigger className="py-2 hover:no-underline">
+            <p className="text-base font-medium text-black">Price</p>
+          </AccordionTrigger>
+          <AccordionContent className="pb-2">
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">€0 - €100</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">€100 - €500</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">€500+</span>
+              </label>
             </div>
-          ))}
-        </div>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="category" className="border-0">
+          <div className="h-px bg-gray-200 w-full"></div>
+          <AccordionTrigger className="py-2 hover:no-underline">
+            <p className="text-base font-medium text-black">Category</p>
+          </AccordionTrigger>
+          <AccordionContent className="pb-2">
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">Solar Panels</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">Inverters</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">Mounting Systems</span>
+              </label>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="brand" className="border-0">
+          <div className="h-px bg-gray-200 w-full"></div>
+          <AccordionTrigger className="py-2 hover:no-underline">
+            <p className="text-base font-medium text-black">Brand</p>
+          </AccordionTrigger>
+          <AccordionContent className="pb-2">
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">JA Solar</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">Trina Solar</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm text-gray-700">LG Solar</span>
+              </label>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }

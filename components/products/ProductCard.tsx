@@ -1,7 +1,3 @@
-import { Star, ShoppingCart } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import styles from "./ProductCatalog.module.css";
-
 interface ProductSpecifications {
   power: string;
   type: string;
@@ -12,16 +8,9 @@ interface ProductSpecifications {
 interface Product {
   id: string;
   name: string;
-  vendor: string;
-  vendorCountry: string;
-  rating: number;
-  reviewCount: number;
+  price: string;
   image: string;
   specifications: ProductSpecifications;
-  availability: string;
-  pricePerWatt: string;
-  currency: string;
-  unit: string;
 }
 
 interface ProductCardProps {
@@ -30,69 +19,82 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className={styles.productCard}>
-      {/* Vendor Info */}
-      <div className={styles.vendorInfo}>
-        <span className={styles.vendorName}>{product.vendor}</span>
-        <span className={styles.countryBadge}>
-          {product.vendorCountry}
-        </span>
-        <div className={styles.ratingContainer}>
-          <Star className="h-4 w-4 text-yellow-400 fill-current" />
-          <span className="text-sm text-gray-600">
-            {product.rating} ({product.reviewCount})
-          </span>
+    <div className="bg-neutral-50 rounded-xl p-2 flex flex-col gap-3">
+      {/* White container */}
+      <div className="bg-white rounded-lg p-2 flex flex-col gap-2.5 items-center">
+        {/* Product Image */}
+        <div className="h-[236px] w-[120px] relative">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
         </div>
-      </div>
 
-      {/* Product Image */}
-      <div className="flex justify-center mb-4">
-        <img
-          src={product.image}
-          alt={product.name}
-          className={styles.productImage}
-        />
+        {/* Specification Badges */}
+        <div className="flex flex-wrap gap-1 items-center justify-center">
+          {/* Power Badge - Green */}
+          <div className="bg-[#00b56a] flex items-center gap-1.5 px-2 py-1 rounded text-white">
+            <img
+              src="/assets/76ede529da07d1e31a85229e3153ff87a6d2cdfe.svg"
+              alt="Power icon"
+              className="w-3 h-3"
+            />
+            <span className="text-xs font-medium">
+              Power:{" "}
+              <span className="text-white/80">
+                {product.specifications.power}
+              </span>
+            </span>
+          </div>
+
+          {/* Type Badge - Gray */}
+          <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
+            <img
+              src="/assets/f90db6c737814d5a3e8aeb19b199986a961e2500.svg"
+              alt="Type icon"
+              className="w-3.5 h-3.5"
+            />
+            <span className="text-xs font-medium text-[#787878]">
+              {product.specifications.type}
+            </span>
+          </div>
+
+          {/* Color Badge - Gray */}
+          <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
+            <img
+              src="/assets/e37e2f55d0b3b1ff471b6ae0293e708fd1d7c945.svg"
+              alt="Color icon"
+              className="w-3.5 h-3.5"
+            />
+            <span className="text-xs font-medium text-[#787878]">
+              {product.specifications.color}
+            </span>
+          </div>
+
+          {/* Dimensions Badge - Gray */}
+          <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
+            <img
+              src="/assets/2b8314611987c4a602a282b9d038bf48fe8bc6c7.svg"
+              alt="Dimensions icon"
+              className="w-3.5 h-3.5"
+            />
+            <span className="text-xs font-medium text-[#787878]">
+              {product.specifications.dimensions}
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Product Name */}
-      <h3 className={styles.productName}>
+      <p className="text-sm font-medium text-gray-900 text-center leading-normal">
         {product.name}
-      </h3>
-
-      {/* Specifications */}
-      <div className={styles.specifications}>
-        <div className={styles.specItem}>
-          <span className={styles.specLabel}>Power:</span> {product.specifications.power}
-        </div>
-        <div className={styles.specItem}>
-          <span className={styles.specLabel}>Type:</span> {product.specifications.type}
-        </div>
-        <div className={styles.specItem}>
-          <span className={styles.specLabel}>Colour:</span> {product.specifications.color}
-        </div>
-        <div className={styles.specItem}>
-          <span className={styles.specLabel}>Dimensions (mm):</span> {product.specifications.dimensions}
-        </div>
-      </div>
-
-      {/* Availability */}
-      <div className={styles.availability}>
-        <div className={styles.availabilityDot}></div>
-        <span className={styles.availabilityText}>• {product.availability}</span>
-      </div>
+      </p>
 
       {/* Price */}
-      <div className={styles.priceContainer}>
-        <span className={styles.priceText}>
-          {product.pricePerWatt} /{product.unit}
-        </span>
-      </div>
-
-      {/* Buy Button */}
-      <button className={styles.buyButton}>
-        <ShoppingCart className="h-4 w-4 mr-2" />
-        Buy
-      </button>
+      <p className="text-sm font-medium text-gray-900 text-center">
+        {product.price}
+      </p>
     </div>
   );
 }
