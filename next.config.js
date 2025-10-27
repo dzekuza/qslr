@@ -8,7 +8,10 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    unoptimized: process.env.NODE_ENV === 'production', // Disable optimization in production if needed
+  },
+  // Disable static optimization for dynamic routes to prevent caching issues
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
   },
 }
 

@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 // Fallback product data if database is empty
 const fallbackProducts = [
   {
-    id: "1",
+    id: "fallback-1",
     name: "JA Solar JAM60S20 375/MR 365-390 1000V Silver Frame QC 4.10",
     price: "€25.88",
     pricePerWatt: "€0.069/Wp",
@@ -72,7 +72,7 @@ const fallbackProducts = [
     },
   },
   {
-    id: "2",
+    id: "fallback-2",
     name: "JA Solar JAM60S20 380/MR 365-390 1000V Silver Frame QC 4.10",
     price: "€26.20",
     pricePerWatt: "€0.069/Wp",
@@ -119,7 +119,7 @@ const fallbackProducts = [
     },
   },
   {
-    id: "3",
+    id: "fallback-3",
     name: "JA Solar JAM60S20 365/MR 365-390 1000V Silver Frame QC 4.10",
     price: "€25.20",
     pricePerWatt: "€0.069/Wp",

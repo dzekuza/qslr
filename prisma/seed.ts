@@ -55,7 +55,7 @@ async function main() {
       businessName: 'SolarTech Solutions',
       businessEmail: 'vendor@test.com',
       businessPhone: '+1234567890',
-      status: 'APPROVED',
+      status: 'APPROVED' as const,
       approvedAt: new Date(),
     },
   });
