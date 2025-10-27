@@ -194,8 +194,8 @@ function DesktopMenu() {
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <div className="grid w-full md:w-4xl md:grid-cols-[1fr_.30fr]">
+                    <NavigationMenuContent className="w-full max-w-none">
+                        <div className="grid w-full md:grid-cols-[1fr_.30fr]">
                             <ul className="grid grow gap-4 p-4 md:grid-cols-3 md:border-r">
                                 {productLinks.slice(0, 3).map((link) => (
                                     <li key={link.href}>
@@ -219,8 +219,8 @@ function DesktopMenu() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>Company</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <div className="grid w-full md:w-4xl md:grid-cols-[1fr_.40fr]">
+                    <NavigationMenuContent className="w-full max-w-none">
+                        <div className="grid w-full md:grid-cols-[1fr_.40fr]">
                             <ul className="grid grow grid-cols-2 gap-4 p-4 md:border-r">
                                 {companyLinks.slice(0, 2).map((link) => (
                                     <li key={link.href}>
