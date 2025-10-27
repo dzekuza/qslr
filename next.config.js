@@ -8,6 +8,8 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Disable image optimization for local assets to prevent errors
+    unoptimized: true,
   },
   // Disable static optimization for dynamic routes to prevent caching issues
   experimental: {

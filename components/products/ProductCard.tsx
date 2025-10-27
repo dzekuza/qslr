@@ -36,10 +36,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 width={120}
                 height={236}
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback to default image if the image fails to load
-                  e.currentTarget.src = "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png";
-                }}
+                unoptimized={true}
               />
             ) : (
               <div className="w-full h-full bg-gray-200 flex items-center justify-center">

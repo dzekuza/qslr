@@ -127,6 +127,7 @@ export default function Home() {
                 width={80}
                 height={80}
                 className="w-[80px] mb-2 object-cover"
+                unoptimized={true}
               />
               <p className="text-sm font-medium text-black text-center">
                 Solar panels
@@ -148,6 +149,7 @@ export default function Home() {
                     width={80}
                     height={80}
                     className="w-[80px] mb-2 object-cover"
+                    unoptimized={true}
                   />
                   <p className="text-sm font-medium text-black text-center">
                     Inverters
@@ -167,6 +169,7 @@ export default function Home() {
                 width={80}
                 height={80}
                 className="w-[80px] mb-2 object-cover"
+                unoptimized={true}
               />
               <p className="text-sm font-medium text-black text-center">
                 Solar panels

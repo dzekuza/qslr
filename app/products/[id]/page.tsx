@@ -391,6 +391,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                                         width={232}
                                         height={456}
                                         className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+                                        unoptimized={true}
                                     />
                                 </div>
                             </div>
@@ -414,6 +415,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                                                 width={40}
                                                 height={40}
                                                 className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+                                                unoptimized={true}
                                             />
                                         </div>
                                     </div>
