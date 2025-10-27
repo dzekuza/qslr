@@ -205,6 +205,9 @@ export default function ProductsPage() {
             price: parseFloat(product.price.replace("€", "")),
             wattage: parseInt(product.specifications.power.replace("W", "")),
             stock: parseInt(product.availability.replace(" pcs", "")),
+            image: product.image,
+            images: [product.image],
+            thumbnail: product.image,
             vendor: {
               businessName: product.vendor,
               country: product.vendorCountry,
@@ -224,6 +227,9 @@ export default function ProductsPage() {
           price: parseFloat(product.price.replace("€", "")),
           wattage: parseInt(product.specifications.power.replace("W", "")),
           stock: parseInt(product.availability.replace(" pcs", "")),
+          image: product.image,
+          images: [product.image],
+          thumbnail: product.image,
           vendor: {
             businessName: product.vendor,
             country: product.vendorCountry,

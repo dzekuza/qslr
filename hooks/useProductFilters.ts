@@ -31,6 +31,9 @@ export interface Product {
   stock: number;
   panelType?: string;
   certification?: string[];
+  image?: string;
+  images?: string[];
+  thumbnail?: string;
   vendor: {
     businessName: string;
     country?: string;

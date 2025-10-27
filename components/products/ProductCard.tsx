@@ -13,6 +13,7 @@ interface Product {
   name: string;
   price: string;
   image: string;
+  thumbnail?: string;
   specifications: ProductSpecifications;
 }
 
@@ -28,13 +29,23 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="bg-white rounded-lg p-2 flex flex-col gap-2.5 items-center">
           {/* Product Image */}
           <div className="h-[236px] w-[120px] relative">
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={120}
-              height={236}
-              className="w-full h-full object-cover"
-            />
+            {product.image || product.thumbnail ? (
+              <Image
+                src={product.image || product.thumbnail || "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"}
+                alt={product.name}
+                width={120}
+                height={236}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to default image if the image fails to load
+                  e.currentTarget.src = "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png";
+                }}
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span className="text-gray-400 text-xs">No Image</span>
+              </div>
+            )}
           </div>
 
           {/* Specification Badges */}
