@@ -13,9 +13,11 @@ import {
     Heart,
     MessageSquare,
     Package,
+    Plus,
     Ruler,
     Share2,
     Shield,
+    ShoppingCart,
     Star,
     Truck,
     Weight,
@@ -169,7 +171,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                             {/* Description Section */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start leading-[20px] not-italic p-[24px] relative rounded-[16px] shrink-0 text-black w-full">
-                                <p className="font-semibold relative shrink-0 text-[16px] w-full" style={{ fontWeight: 600 }}>
+                                <p
+                                    className="font-semibold relative shrink-0 text-[16px] w-full"
+                                    style={{ fontWeight: 600 }}
+                                >
                                     Description
                                 </p>
                                 <p className="font-normal min-w-full relative shrink-0 text-[14px] w-full">
@@ -179,7 +184,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                             {/* Details Section */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
-                                <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full" style={{ fontWeight: 600 }}>
+                                <p
+                                    className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full"
+                                    style={{ fontWeight: 600 }}
+                                >
                                     Full details list
                                 </p>
                                 <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
@@ -286,7 +294,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                             {/* Delivery Info */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
-                                <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full" style={{ fontWeight: 600 }}>
+                                <p
+                                    className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full"
+                                    style={{ fontWeight: 600 }}
+                                >
                                     Delivery
                                 </p>
                                 <div className="content-stretch flex flex-col gap-[20px] items-start relative shrink-0 w-full">
@@ -312,11 +323,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
                             {/* Actions Container */}
                             <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full">
                                 <div className="basis-0 bg-[#1d1d1f] box-border content-stretch flex gap-[10px] grow items-center justify-center min-h-px min-w-px px-[24px] py-[16px] relative rounded-[8px] shrink-0">
+                                    <Plus className="w-4 h-4 text-white" />
                                     <p className="font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-pre">
                                         Add to cart
                                     </p>
                                 </div>
                                 <div className="basis-0 bg-[#00b56a] box-border content-stretch flex gap-[10px] grow items-center justify-center min-h-px min-w-px px-[24px] py-[16px] relative rounded-[8px] shrink-0">
+                                    <ShoppingCart className="w-4 h-4 text-white" />
                                     <p className="font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-pre">
                                         Buy now
                                     </p>
