@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -17,14 +17,13 @@ export async function PATCH(
         }
 
         const { status } = await request.json();
-        const { id } = await params;
 
         if (!status || !['DRAFT', 'PENDING', 'ACTIVE', 'REJECTED', 'OUT_OF_STOCK'].includes(status)) {
             return NextResponse.json({ error: 'Invalid status' }, { status: 400 });
         }
 
         const product = await prisma.product.update({
-            where: { id },
+            where: { id: params.id },
             data: { 
                 status,
                 ...(status === 'ACTIVE' && { publishedAt: new Date() })

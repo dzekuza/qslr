@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function PUT(
     request: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -26,7 +26,7 @@ export async function PUT(
 
         const body = await request.json();
         const { name, description, price, stock, status } = body;
-        const { id } = await params;
+        const { id } = params;
 
         const product = await prisma.product.update({
             where: {
@@ -51,7 +51,7 @@ export async function PUT(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -70,7 +70,7 @@ export async function DELETE(
             return NextResponse.json({ error: 'Vendor not found' }, { status: 404 });
         }
 
-        const { id } = await params;
+        const { id } = params;
 
         await prisma.product.delete({
             where: {
