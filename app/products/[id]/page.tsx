@@ -75,23 +75,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
     return (
         <PublicLayout>
-            <div className="bg-white min-h-screen">
+            <div className=" min-h-screen">
                 {/* Breadcrumb */}
-                <div className="bg-gray-50 border-b">
-                    <div className="max-w-7xl mx-auto px-4 py-3">
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <Link
-                                href="/products"
-                                className="hover:text-gray-900 flex items-center gap-1"
-                            >
-                                <ArrowLeft className="w-4 h-4" />
-                                Back to Products
-                            </Link>
-                            <span>/</span>
-                            <span className="text-gray-900">
-                                {product.name}
-                            </span>
-                        </div>
+
+                <div className="max-w-7xl mx-auto px-4 py-3">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <Link
+                            href="/products"
+                            className="hover:text-gray-900 flex items-center gap-1"
+                        >
+                            <ArrowLeft className="w-4 h-4" />
+                            Back to Products
+                        </Link>
+                        <span>/</span>
+                        <span className="text-gray-900">
+                            {product.name}
+                        </span>
                     </div>
                 </div>
 
@@ -170,7 +169,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                             {/* Description Section */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start leading-[20px] not-italic p-[24px] relative rounded-[16px] shrink-0 text-black w-full">
-                                <p className="font-semibold relative shrink-0 text-[16px] w-full">
+                                <p className="font-semibold relative shrink-0 text-[16px] w-full" style={{ fontWeight: 600 }}>
                                     Description
                                 </p>
                                 <p className="font-normal min-w-full relative shrink-0 text-[14px] w-full">
@@ -180,7 +179,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                             {/* Details Section */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
-                                <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full">
+                                <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full" style={{ fontWeight: 600 }}>
                                     Full details list
                                 </p>
                                 <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
@@ -287,7 +286,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                             {/* Delivery Info */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative rounded-[16px] shrink-0 w-full">
-                                <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full">
+                                <p className="font-semibold leading-[20px] not-italic relative shrink-0 text-[16px] text-black w-full" style={{ fontWeight: 600 }}>
                                     Delivery
                                 </p>
                                 <div className="content-stretch flex flex-col gap-[20px] items-start relative shrink-0 w-full">
