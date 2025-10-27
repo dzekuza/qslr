@@ -9,7 +9,7 @@ export function PublicLayout({ children }: PublicLayoutProps) {
     return (
         <div className="min-h-screen">
             <SolarNavigationMenu />
-            <main className="p-2 bg-gray-100 gap-4 space-y-2">
+            <main className="pt-20 p-2 bg-gray-100 gap-4 space-y-2">
                 {children}
             </main>
         </div>
