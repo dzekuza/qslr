@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 alt={product.name}
                 width={120}
                 height={236}
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-cover"
               />
             ) : (
               <div className="w-full h-full bg-gray-200 flex items-center justify-center">
