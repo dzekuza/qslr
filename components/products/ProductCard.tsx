@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getAssetUrl } from "@/lib/assets";
+import { SupabaseImage } from "@/components/ui/supabase-image";
 
 interface ProductSpecifications {
   power: string;
@@ -30,13 +32,13 @@ export function ProductCard({ product }: ProductCardProps) {
           {/* Product Image */}
           <div className="h-[236px] w-[120px] relative">
             {product.image || product.thumbnail ? (
-              <Image
-                src={product.image || product.thumbnail || "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"}
+              <SupabaseImage
+                src={product.image || product.thumbnail || getAssetUrl("99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png")}
+                fallbackSrc="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
                 alt={product.name}
                 width={120}
                 height={236}
                 className="w-full h-full object-cover"
-                unoptimized={true}
               />
             ) : (
               <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -50,7 +52,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Power Badge - Green */}
             <div className="bg-[#00b56a] flex items-center gap-1.5 px-2 py-1 rounded text-white">
               <img
-                src="/assets/76ede529da07d1e31a85229e3153ff87a6d2cdfe.svg"
+                src={getAssetUrl("76ede529da07d1e31a85229e3153ff87a6d2cdfe.svg")}
                 alt="Power icon"
                 className="w-3 h-3"
               />
@@ -65,7 +67,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Type Badge - Gray */}
             <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
               <img
-                src="/assets/f90db6c737814d5a3e8aeb19b199986a961e2500.svg"
+                src={getAssetUrl("f90db6c737814d5a3e8aeb19b199986a961e2500.svg")}
                 alt="Type icon"
                 className="w-3.5 h-3.5"
               />
@@ -77,7 +79,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Color Badge - Gray */}
             <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
               <img
-                src="/assets/e37e2f55d0b3b1ff471b6ae0293e708fd1d7c945.svg"
+                src={getAssetUrl("e37e2f55d0b3b1ff471b6ae0293e708fd1d7c945.svg")}
                 alt="Color icon"
                 className="w-3.5 h-3.5"
               />
@@ -89,7 +91,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Dimensions Badge - Gray */}
             <div className="bg-[#ebebeb] flex items-center gap-1.5 px-1.5 py-1 rounded">
               <img
-                src="/assets/2b8314611987c4a602a282b9d038bf48fe8bc6c7.svg"
+                src={getAssetUrl("2b8314611987c4a602a282b9d038bf48fe8bc6c7.svg")}
                 alt="Dimensions icon"
                 className="w-3.5 h-3.5"
               />

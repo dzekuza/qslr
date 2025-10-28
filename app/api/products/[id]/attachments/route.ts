@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
+import { uploadFile, getPublicUrl } from '@/lib/supabase-storage';
 
 export async function POST(
     request: NextRequest,
@@ -54,22 +52,34 @@ export async function POST(
             return NextResponse.json({ error: 'File too large' }, { status: 400 });
         }
 
-        // Create uploads directory if it doesn't exist
-        const uploadsDir = join(process.cwd(), 'public', 'uploads', 'attachments');
-        if (!existsSync(uploadsDir)) {
-            await mkdir(uploadsDir, { recursive: true });
-        }
-
         // Generate unique filename
         const timestamp = Date.now();
         const fileExtension = file.name.split('.').pop();
         const fileName = `${timestamp}-${Math.random().toString(36).substring(2)}.${fileExtension}`;
-        const filePath = join(uploadsDir, fileName);
+        const filePath = `${id}/${fileName}`;
 
-        // Save file
+        // Convert file to buffer
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        await writeFile(filePath, buffer);
+
+        // Upload to Supabase Storage
+        const uploadResult = await uploadFile(
+            'product-attachments',
+            filePath,
+            buffer,
+            {
+                contentType: file.type,
+                upsert: false
+            }
+        );
+
+        if (uploadResult.error) {
+            console.error('Error uploading to Supabase Storage:', uploadResult.error);
+            return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });
+        }
+
+        // Get public URL
+        const { data: { publicUrl } } = getPublicUrl('product-attachments', filePath);
 
         // Save attachment record to database
         const attachment = await prisma.productAttachment.create({
@@ -77,7 +87,7 @@ export async function POST(
                 productId: id,
                 fileName: fileName,
                 originalName: file.name,
-                filePath: `/uploads/attachments/${fileName}`,
+                filePath: publicUrl,
                 fileSize: file.size,
                 mimeType: file.type,
                 fileType: fileType as any,

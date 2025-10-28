@@ -8,8 +8,15 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Disable image optimization for local assets to prevent errors
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+    // Temporarily disable optimization for Supabase URLs until properly configured
+    unoptimized: !!(process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_SUPABASE_URL),
   },
   // Disable static optimization for dynamic routes to prevent caching issues
   experimental: {

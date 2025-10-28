@@ -3,6 +3,8 @@ import Image from "next/image";
 import { PublicLayout } from "@/components/layout/public-layout";
 import LogoLoop from "@/components/LogoLoop";
 import { ArrowRight, Heart, Search, ShoppingCart, Star } from "lucide-react";
+import { getAssetUrl } from "@/lib/assets";
+import { SupabaseImage } from "@/components/ui/supabase-image";
 
 // Logo data for the animated logo loop
 const partnerLogos = [
@@ -121,13 +123,13 @@ export default function Home() {
               href="/products?category=solar-panels"
               className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
-              <Image
-                src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
+              <SupabaseImage
+                src={getAssetUrl("abb1eff66765117b99567e2acf16610e5cee5265.png")}
+                fallbackSrc="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
                 alt="Solar Panel"
                 width={80}
                 height={80}
                 className="w-[80px] mb-2 object-cover"
-                unoptimized={true}
               />
               <p className="text-sm font-medium text-black text-center">
                 Solar panels
@@ -143,13 +145,13 @@ export default function Home() {
                   href="/products?category=inverters"
                   className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
                 >
-                  <Image
-                    src="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
+                  <SupabaseImage
+                    src={getAssetUrl("99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png")}
+                    fallbackSrc="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
                     alt="Inverter"
                     width={80}
                     height={80}
                     className="w-[80px] mb-2 object-cover"
-                    unoptimized={true}
                   />
                   <p className="text-sm font-medium text-black text-center">
                     Inverters
@@ -163,13 +165,13 @@ export default function Home() {
               href="/products?category=solar-panels"
               className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center justify-end min-w-[190px] h-auto flex-shrink-0 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
-              <Image
-                src="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
+              <SupabaseImage
+                src={getAssetUrl("abb1eff66765117b99567e2acf16610e5cee5265.png")}
+                fallbackSrc="/assets/abb1eff66765117b99567e2acf16610e5cee5265.png"
                 alt="Solar Panel"
                 width={80}
                 height={80}
                 className="w-[80px] mb-2 object-cover"
-                unoptimized={true}
               />
               <p className="text-sm font-medium text-black text-center">
                 Solar panels

@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ProductCard } from "@/components/products/ProductCard";
 import { H1, H2, H3, H4, Muted, P, Small } from "@/components/ui/typography";
+import { getAssetUrl } from "@/lib/assets";
+import { SupabaseImage } from "@/components/ui/supabase-image";
 import {
     ArrowLeft,
     Award,
@@ -383,15 +385,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
                             {/* Main Image Container */}
                             <div className="bg-neutral-50 box-border content-stretch flex flex-col gap-[10px] items-center justify-center overflow-hidden px-[24px] py-[24px] relative rounded-[16px] shrink-0 w-full">
                                 <div className="h-[456px] relative shrink-0 w-[232px]">
-                                    <Image
+                                    <SupabaseImage
                                         src={product.thumbnail ||
                                             product.images[0] ||
-                                            "/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"}
+                                            getAssetUrl(
+                                                "99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png",
+                                            )}
+                                        fallbackSrc="/assets/99f6956ff82b9d2c6f0d749b9e0c274fa969adad.png"
                                         alt={product.name}
                                         width={232}
                                         height={456}
                                         className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-                                        unoptimized={true}
                                     />
                                 </div>
                             </div>
@@ -407,15 +411,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
                                         className="basis-0 bg-neutral-50 box-border content-stretch flex gap-[10px] grow h-full items-center justify-center min-h-px min-w-px overflow-hidden px-[24px] py-[24px] relative rounded-[4px] shrink-0"
                                     >
                                         <div className="h-[40px] relative shrink-0 w-[40px]">
-                                            <Image
+                                            <SupabaseImage
                                                 src={image}
+                                                fallbackSrc={image.replace(
+                                                    /^https:\/\/[^\/]+\/storage\/v1\/object\/public\/assets\//,
+                                                    "/assets/",
+                                                )}
                                                 alt={`${product.name} ${
                                                     index + 1
                                                 }`}
                                                 width={40}
                                                 height={40}
                                                 className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-                                                unoptimized={true}
                                             />
                                         </div>
                                     </div>
